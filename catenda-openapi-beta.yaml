@@ -7,12 +7,7 @@ info:
     This documentation assumes a basic knowledge of how REST APIs work. Visit [this](https://www.restapitutorial.com/) link if you need an introduction to this topic.
 
     In case you have any questions or feedback, we would love to hear from you. Email us at support@catenda.com
-  termsOfService: https://catenda.com/user-terms-of-service/
-  contact:
-    email: support@catenda.com
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: "1.0"
 externalDocs:
   description: Find out more about Catenda REST API
   url: https://api.catenda.com/developers/reference/api/v2#catenda-rest-api-v2-stable
