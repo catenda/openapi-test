@@ -12,8 +12,6 @@ info:
 externalDocs:
   description: Find out more about Catenda REST API
   url: https://api.catenda.com/developers/reference/api/v2#catenda-rest-api-v2-stable
-servers:
-  - url: https://api.catenda.com/v2
 tags:
   - name: project
     description: Information about what projects are that can be as long as needed
