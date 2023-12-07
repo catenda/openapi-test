@@ -1,7 +1,6 @@
 openapi: 3.0.3
 info:
   title: OpenCDE OpenAPI Specification
-  termsOfService: https://catenda.com/user-terms-of-service/
   version: "1.0"
 externalDocs:
   description: Find out more about Catenda REST API
@@ -865,7 +864,7 @@ components:
         id:
           type: integer
           format: int64
-          example: 989038325613499ea6d35a3d8788b3a9
+          example: dr346f5422
         user:
           $ref: '#/components/schemas/User'
     Model:
@@ -876,7 +875,7 @@ components:
         id:
           type: integer
           format: int64
-          example: 989038325613499ea6d35a3d8788b3a9
+          example: d746f5422
         name:
           type: string
           example: ARC
@@ -889,7 +888,7 @@ components:
         id:
           type: integer
           format: int64
-          example: 989038325613499ea6d35a3d8788b3a9
+          example: d729fd422
         name:
           type: string
           example: Green
@@ -904,10 +903,10 @@ components:
         id:
           type: integer
           format: int64
-          example: 989038325613499ea6d35a3d8788b3a9
+          example: 12345
         avatarUrl:
           type: string
-          example: https://api.catenda.com/v2/avatar/5HG6j4MXMGkunK4gH2RoAM85VqcGsh9kTGCQGYgWZZMwJBcnsa0iwt1wF0LwJsjW
+          example: https://api.catenda.com/v2/avatar/12345
         name:
           type: string
           example: Kristine Knight
@@ -923,7 +922,7 @@ components:
         id:
           type: integer
           format: int64
-          example: 989038325613499ea6d35a3d8788b3a9
+          example: c729438c4
         name:
           type: string
           example: Old Town High School
@@ -932,7 +931,7 @@ components:
           example: Old Town, Stavanger
         imageUrl:
           type: string
-          example: https://api.catenda.com/v2/projects/c729438c4f674d729fd42236783e6a12/image
+          example: https://api.catenda.com/v2/projects/c729438c4/image
     ApiResponseOk:
       type: object
       properties:
