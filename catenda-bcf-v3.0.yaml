@@ -1,23 +1,20 @@
 openapi: 3.0.3
 info:
-  title: OpenCDE OpenAPI Specification
-  version: "1.0"
-externalDocs:
-  description: Find out more about Catenda REST API
-  url: https://api.catenda.com/developers/reference/api/v2#catenda-rest-api-v2-stable
+  title: BCF OpenAPI Specification
+  version: "3.0"
 servers:
-  - url: https://api.catenda.com/v2
+  - url: https://api.catenda.com/opencde/bcf/3.0
 tags:
-  - name: project
-  - name: member
-  - name: model
-  - name: label
+  - name: topic
+  - name: comment
+  - name: document
+  - name: issue-board
 paths:
   /projects:
     get:
       tags:
-        - project
-      summary: List projects
+        - issue-board
+      summary: Get issue boards
       operationId: listProjects
       responses:
         '200':
@@ -27,22 +24,22 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Project'
+                  $ref: '#/components/schemas/Issue Board'
       security:
         - catenda_auth:
             - write:projects
             - read:projects
     post:
       tags:
-        - project
-      summary: Create project
+        - issue-board
+      summary: Create issue board
       operationId: addProject
       requestBody:
-        description: Create a new project
+        description: Create a new issue board
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Project'
+              $ref: '#/components/schemas/Issue Board'
         required: true
       responses:
         '200':
@@ -50,26 +47,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'          
-        '403':
-          description: Insufficient privilege
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResponseError'
-              examples:
-                100:
-                  value:
-                    code: 100
-                    message: Insufficient privilege
-                101:
-                  value:
-                    code: 101
-                    message: Project limit exceeded
-        '404':
-          description: Organization (:org) not found
-        '422':
-          description: Message from input validation
+                $ref: '#/components/schemas/Issue Board'          
       security:
         - catenda_auth:
             - write:projects
@@ -77,8 +55,8 @@ paths:
   /projects/{project}:
     get:
       tags:
-        - project
-      summary: Get project
+        - issue-board
+      summary: Get issue board
       operationId: getProject
       parameters:
         - name: project
@@ -94,7 +72,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
+                $ref: '#/components/schemas/Issue Board'
         '404':
           description: Project (:project) not found
       security:
@@ -103,8 +81,8 @@ paths:
             - read:project
     put:
       tags:
-        - project
-      summary: Update  project
+        - issue-board
+      summary: Update issue board
       operationId: updateProject
       parameters:
         - name: project
@@ -119,7 +97,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Project'
+              $ref: '#/components/schemas/Issue Board'
         required: true
       responses:
         '200':
@@ -127,7 +105,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
+                $ref: '#/components/schemas/Issue Board'
         '403':
           description: Insufficient privilege
         '404':
@@ -138,39 +116,16 @@ paths:
         - catenda_auth:
             - write:projects
             - read:projects
-    delete:
-      tags:
-        - project
-      summary: Delete project
-      operationId: deleteProject
-      parameters:
-        - name: project
-          in: path
-          description: ID of project that needs to be deleted
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '403':
-          description: Insufficient privilege
-        '404':
-          description: Project (:project) not found
-      security:
-        - catenda_auth:
-            - write:project
-            - read:project
-  /projects/{project}/members:
+  /projects/{project}/topics:
     get:
       tags:
-        - member
-      summary: Get members
-      description: List project members.
-      operationId: getMembers
+        - topic
+      summary: Get topics
+      operationId: getTopics
       parameters:
         - name: project
           in: path
-          description: ID of project members belong to
+          description: ID of project topics belong to
           required: true
           schema:
             type: integer
@@ -183,7 +138,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Member'
+                  $ref: '#/components/schemas/Topic'
         '404':
           description: Not found
           content:
@@ -197,23 +152,23 @@ paths:
                     message: Project (:project) not found
     post:
       tags:
-        - member
-      summary: Add member
-      operationId: addMember
+        - topic
+      summary: Add topic
+      operationId: addTopic
       parameters:
         - name: project
           in: path
-          description: ID of project member will belong to
+          description: ID of project topic will belong to
           required: true
           schema:
             type: integer
             format: int64
       requestBody:
-        description: Create a new member
+        description: Create a new topic
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Member'
+              $ref: '#/components/schemas/Topic'
         required: true
       responses:
         '200':
@@ -221,34 +176,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Member'
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResponseError'
-              examples:
-                Already a member:
-                  value:
-                    code: 24
-                    message: User (:user) is already a member
-                Unknown user:
-                  value:
-                    code: 24
-                    message: Unknown user (:user)
-                Unable to set role:
-                  value:
-                    code: 24
-                    message: Unable to set role (:role)
-                Existing team:
-                  value:
-                    code: 24
-                    message: Cannot add an existing team as a member (:user)
-                Invalid role:
-                  value:
-                    code: 24
-                    message: Invalid role (:role)
+                $ref: '#/components/schemas/Topic'
         '403':
           description: Forbidden
           content:
@@ -271,23 +199,23 @@ paths:
                   value:
                     code: 20
                     message: Project (:project) not found
-  /projects/{project}/members/{user}:
+  /projects/{project}/topics/{topic}:
     get:
       tags:
-        - member
-      summary: Get member
-      operationId: getMember
+        - topic
+      summary: Get topic
+      operationId: getTopic
       parameters:
         - name: project
           in: path
-          description: ID of project member belongs to
+          description: ID of project topic belongs to
           required: true
           schema:
             type: integer
             format: int64
-        - name: user
+        - name: topic
           in: path
-          description: ID of user to return
+          description: ID of topic to return
           required: true
           schema:
             type: integer
@@ -298,7 +226,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Member'
+                $ref: '#/components/schemas/Topic'
         '404':
           description: Not found
           content:
@@ -310,14 +238,14 @@ paths:
                   value:
                     code: 20
                     message: Project (:project) not found
-                Member not found:
+                Topic not found:
                   value:
                     code: 20
-                    message: Member (:user) not found
+                    message: Topic (:topic) not found
     put:
       tags:
-        - member
-      summary: Update member
+        - topic
+      summary: Update topic
       operationId: updateMember
       parameters:
         - name: project
@@ -327,19 +255,19 @@ paths:
           schema:
             type: integer
             format: int64
-        - name: user
+        - name: topic
           in: path
-          description: ID of user to update
+          description: ID of topic to update
           required: true
           schema:
             type: integer
             format: int64
       requestBody:
-        description: Create a new member
+        description: Update a topic
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Member'
+              $ref: '#/components/schemas/Topic'
         required: true
       responses:
         '200':
@@ -347,7 +275,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Member'
+                $ref: '#/components/schemas/Topic'
         '404':
           description: Not found
           content:
@@ -355,15 +283,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiResponseError'
               examples:
-                Member not found:
+                Topic not found:
                   value:
                     code: 20
-                    message: Member (:user) not found
+                    message: Topic (:topic) not found
     delete:
       tags:
-        - member
-      summary: Delete member
-      operationId: deleteMember
+        - topic
+      summary: Delete topic
+      operationId: deleteTopic
       parameters:
         - name: project
           in: path
@@ -372,9 +300,9 @@ paths:
           schema:
             type: integer
             format: int64
-        - name: user
+        - name: topic
           in: path
-          description: ID of user to delete
+          description: ID of topic to delete
           required: true
           schema:
             type: integer
@@ -382,10 +310,6 @@ paths:
       responses:
         '200':
           description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Member'
         '404':
           description: Not found
           content:
@@ -393,20 +317,27 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiResponseError'
               examples:
-                Member not found:
+                Topic not found:
                   value:
                     code: 20
-                    message: Member (:user) not found
-  /projects/{project}/models:
+                    message: Topic (:topic) not found
+  /projects/{project}/topics/{topic}/comments:
     get:
       tags:
-        - model
-      summary: Get models
-      operationId: getModels
+        - comment
+      summary: Get comments
+      operationId: getComments
       parameters:
         - name: project
           in: path
-          description: ID of project models belong to
+          description: ID of project comments belong to
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: topic
+          in: path
+          description: ID of topic comment belong to
           required: true
           schema:
             type: integer
@@ -419,7 +350,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Model'
+                  $ref: '#/components/schemas/Comment'
         '404':
           description: Not found
           content:
@@ -431,25 +362,36 @@ paths:
                   value:
                     code: 20
                     message: Project (:project) not found
+                Topic not found:
+                  value:
+                    code: 20
+                    message: Topic (:topic) not found
     post:
       tags:
-        - model
-      summary: Add model
-      operationId: addModel
+        - comment
+      summary: Add comment
+      operationId: addComment
       parameters:
         - name: project
           in: path
-          description: ID of project model will belong to
+          description: ID of project comment will belong to
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: topic
+          in: path
+          description: ID of topic comment belong to
           required: true
           schema:
             type: integer
             format: int64
       requestBody:
-        description: Create a new model
+        description: Create a new comment
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Model'
+              $ref: '#/components/schemas/Comment'
         required: true
       responses:
         '200':
@@ -457,7 +399,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Model'
+                $ref: '#/components/schemas/Comment'
         '403':
           description: Forbidden
           content:
@@ -476,27 +418,31 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiResponseError'
               examples:
-                Not found:
+                Project not found:
                   value:
                     code: 20
                     message: Project (:project) not found
-  /projects/{project}/models/{model}:
+                Topic not found:
+                  value:
+                    code: 20
+                    message: Topic (:topic) not found
+  /projects/{project}/topics/{topic}/comments/{comment}:
     get:
       tags:
-        - model
-      summary: Get model
-      operationId: getModel
+        - comment
+      summary: Get comment
+      operationId: getComment
       parameters:
         - name: project
           in: path
-          description: ID of project model belongs to
+          description: ID of project topic belongs to
           required: true
           schema:
             type: integer
             format: int64
-        - name: model
+        - name: topic
           in: path
-          description: ID of model to return
+          description: ID of topic comment belong to
           required: true
           schema:
             type: integer
@@ -507,7 +453,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Model'
+                $ref: '#/components/schemas/Comment'
         '404':
           description: Not found
           content:
@@ -519,15 +465,15 @@ paths:
                   value:
                     code: 20
                     message: Project (:project) not found
-                Model not found:
+                Topic not found:
                   value:
                     code: 20
-                    message: Model (:model) not found
+                    message: Topic (:topic) not found
     put:
       tags:
-        - model
-      summary: Update model
-      operationId: updateModel
+        - comment
+      summary: Update comment
+      operationId: updateComment
       parameters:
         - name: project
           in: path
@@ -536,19 +482,19 @@ paths:
           schema:
             type: integer
             format: int64
-        - name: model
+        - name: topic
           in: path
-          description: ID of model to update
+          description: ID of topic comment belong to
           required: true
           schema:
             type: integer
             format: int64
       requestBody:
-        description: Create a new model
+        description: Update a comment
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Model'
+              $ref: '#/components/schemas/Comment'
         required: true
       responses:
         '200':
@@ -556,7 +502,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Model'
+                $ref: '#/components/schemas/Comment'
         '404':
           description: Not found
           content:
@@ -564,14 +510,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiResponseError'
               examples:
-                Model not found:
+                Project not found:
                   value:
                     code: 20
-                    message: Model (:model) not found
+                    message: Project (:project) not found
+                Topic not found:
+                  value:
+                    code: 20
+                    message: Topic (:topic) not found
     delete:
       tags:
-        - model
-      summary: Delete model
+        - comment
+      summary: Delete comment
       operationId: deleteModel
       parameters:
         - name: project
@@ -581,9 +531,9 @@ paths:
           schema:
             type: integer
             format: int64
-        - name: model
+        - name: topic
           in: path
-          description: ID of model to delete
+          description: ID of topic comment belong to
           required: true
           schema:
             type: integer
@@ -594,7 +544,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Model'
+                $ref: '#/components/schemas/Comment'
         '404':
           description: Not found
           content:
@@ -602,20 +552,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiResponseError'
               examples:
-                Model not found:
+                Project not found:
                   value:
                     code: 20
-                    message: Model (:model) not found
-  /projects/{project}/labels:
+                    message: Project (:project) not found
+                Topic not found:
+                  value:
+                    code: 20
+                    message: Topic (:topic) not found
+  /projects/{project}/documents:
     get:
       tags:
-        - label
-      summary: Get labels
-      operationId: getLabels
+        - document
+      summary: Get documents
+      operationId: getDocuments
       parameters:
         - name: project
           in: path
-          description: ID of project labels belong to
+          description: ID of project documents belong to
           required: true
           schema:
             type: integer
@@ -628,7 +582,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Label'
+                  $ref: '#/components/schemas/Document'
         '404':
           description: Not found
           content:
@@ -642,23 +596,23 @@ paths:
                     message: Project (:project) not found
     post:
       tags:
-        - label
-      summary: Add label
-      operationId: addLabel
+        - document
+      summary: Add document
+      operationId: addDocument
       parameters:
         - name: project
           in: path
-          description: ID of project label will belong to
+          description: ID of project document will belong to
           required: true
           schema:
             type: integer
             format: int64
       requestBody:
-        description: Creates a new label.
+        description: Creates a new document.
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Label'
+              $ref: '#/components/schemas/Document'
         required: true
       responses:
         '200':
@@ -666,7 +620,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Label'
+                $ref: '#/components/schemas/Document'
         '403':
           description: Forbidden
           content:
@@ -689,23 +643,23 @@ paths:
                   value:
                     code: 20
                     message: Project (:project) not found
-  /projects/{project}/labels/{label}:
+  /projects/{project}/documents/{document}:
     get:
       tags:
-        - label
-      summary: Get label
-      operationId: getLabel
+        - document
+      summary: Get document
+      operationId: getDocument
       parameters:
         - name: project
           in: path
-          description: ID of project label belongs to
+          description: ID of project document belongs to
           required: true
           schema:
             type: integer
             format: int64
-        - name: label
+        - name: document
           in: path
-          description: ID of label to return
+          description: ID of document to return
           required: true
           schema:
             type: integer
@@ -716,7 +670,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Label'
+                $ref: '#/components/schemas/Document'
         '404':
           description: Not found
           content:
@@ -728,15 +682,15 @@ paths:
                   value:
                     code: 20
                     message: Project (:project) not found
-                Label not found:
+                Document not found:
                   value:
                     code: 20
-                    message: Label (:label) not found
+                    message: Document (:document) not found
     put:
       tags:
-        - label
-      summary: Update label
-      operationId: updateLabel
+        - document
+      summary: Update document
+      operationId: updateDocument
       parameters:
         - name: project
           in: path
@@ -745,19 +699,19 @@ paths:
           schema:
             type: integer
             format: int64
-        - name: label
+        - name: document
           in: path
-          description: ID of label to update
+          description: ID of document to update
           required: true
           schema:
             type: integer
             format: int64
       requestBody:
-        description: Creates a new label.
+        description: Creates a new document.
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Label'
+              $ref: '#/components/schemas/Document'
         required: true
       responses:
         '200':
@@ -765,7 +719,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Label'
+                $ref: '#/components/schemas/Document'
         '404':
           description: Not found
           content:
@@ -773,15 +727,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiResponseError'
               examples:
-                label not found:
+                document not found:
                   value:
                     code: 20
-                    message: Label (:label) not found
+                    message: Document (:document) not found
     delete:
       tags:
-        - label
-      summary: Delete label
-      operationId: deleteLabel
+        - document
+      summary: Delete document
+      operationId: deleteDocument
       parameters:
         - name: project
           in: path
@@ -790,9 +744,9 @@ paths:
           schema:
             type: integer
             format: int64
-        - name: label
+        - name: document
           in: path
-          description: ID of label to delete
+          description: ID of document to delete
           required: true
           schema:
             type: integer
@@ -803,7 +757,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Label'
+                $ref: '#/components/schemas/Document'
         '404':
           description: Not found
           content:
@@ -811,89 +765,70 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiResponseError'
               examples:
-                Label not found:
+                Document not found:
                   value:
                     code: 20
-                    message: Label (:label) not found
+                    message: Document (:document) not found
 components:
   schemas:
-    Member:
+    Comment:
       required:
-        - role
-        - user
+        - comment
+        - author
       type: object
       properties:
         id:
           type: integer
           format: int64
           example: dr346f5422
-        user:
-          $ref: '#/components/schemas/User'
-    Model:
+        comment:
+          type: string
+          example: A comment!
+        author:
+          type: string
+          example: king@test.com
+    Document:
       required:
-        - name
+        - filename
       type: object
       properties:
         id:
           type: integer
           format: int64
           example: d746f5422
-        name:
+        filename:
           type: string
-          example: ARC
-    Label:
+          example: Myfile.txt
+    Topic:
       required:
-        - name
-        - color
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: d729fd422
-        name:
-          type: string
-          example: Green
-        color:
-          type: string
-          example: '#6aa84f'
-    User:
-      required:
-        - name
-        - username
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 12345
-        avatarUrl:
-          type: string
-          example: https://api.catenda.com/v2/avatar/12345
-        name:
-          type: string
-          example: Kristine Knight
-        username:
-          type: string
-          example: kristine.knight@example.com
-    Project:
-      required:
-        - name
-        - description
+        - title
       type: object
       properties:
         id:
           type: integer
           format: int64
           example: c729438c4
-        name:
+        title:
           type: string
-          example: Old Town High School
-        description:
+          example: Door issue
+        topic_type:
           type: string
-          example: Old Town, Stavanger
-        imageUrl:
+          example: Error
+        topic_status:
           type: string
-          example: https://api.catenda.com/v2/projects/c729438c4/image
+          example: Open
+    Issue Board:
+      required:
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: c729438c4
+        title:
+          type: name
+          example: My BCF project
     ApiResponseOk:
       type: object
       properties:
@@ -922,5 +857,5 @@ components:
         implicit:
           authorizationUrl: https://api.catenda.com/oauth2/authorize
           scopes:
-            write:projects: modify projects that you are administrator
-            read:projects: read projects you are a member of
+            write:projects: modify projects
+            read:projects: read projects

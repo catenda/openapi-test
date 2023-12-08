@@ -5,34 +5,19 @@ info:
 externalDocs:
   description: Find out more about Catenda REST API
   url: https://api.catenda.com/developers/reference/api/v2#catenda-rest-api-v2-stable
+servers:
+  - url: https://api.catenda.com/v2
 tags:
   - name: project
-    description: Information about what projects are that can be as long as needed
-    externalDocs:
-      description: Find out more about projects
-      url: https://api.catenda.com/developers/reference/api/v2#projects
   - name: member
-    description: Information about what members are that can be as long as needed
-    externalDocs:
-      description: Find out more about members
-      url: https://api.catenda.com/developers/reference/api/v2#members
   - name: model
-    description: Information about what models are that can be as long as needed
-    externalDocs:
-      description: Find out more about models
-      url: https://api.catenda.com/developers/reference/api/v2#models
   - name: label
-    description: Information about what labels are that can be as long as needed
-    externalDocs:
-      description: Find out more about labels
-      url: https://api.catenda.com/developers/reference/api/v2#labels
 paths:
   /projects:
     get:
       tags:
         - project
       summary: List projects
-      description: List all projects the current user is member of.
       operationId: listProjects
       responses:
         '200':
@@ -51,10 +36,6 @@ paths:
       tags:
         - project
       summary: Create project
-      description: |-
-        Create a new project. The project will be owned by the current user or the given origanization and count towards the owners project limit.
-
-        The current user must be an owner of the organization if the new project will be owned by an organization.
       operationId: addProject
       requestBody:
         description: Create a new project
@@ -93,12 +74,11 @@ paths:
         - catenda_auth:
             - write:projects
             - read:projects
-  /project/{project}:
+  /projects/{project}:
     get:
       tags:
         - project
       summary: Get project
-      description: Get a project. The current user must be a member of the project.
       operationId: getProject
       parameters:
         - name: project
@@ -124,8 +104,7 @@ paths:
     put:
       tags:
         - project
-      summary: Update an existing project
-      description: Update a project. The current user must be an administrator of the project.
+      summary: Update  project
       operationId: updateProject
       parameters:
         - name: project
@@ -163,8 +142,6 @@ paths:
       tags:
         - project
       summary: Delete project
-      description: |-
-        Delete a project. The current user must be the owner of the project. If the project is owned by an organization, the user must an owner of the organization.
       operationId: deleteProject
       parameters:
         - name: project
@@ -183,7 +160,7 @@ paths:
         - catenda_auth:
             - write:project
             - read:project
-  /project/{project}/members:
+  /projects/{project}/members:
     get:
       tags:
         - member
@@ -222,8 +199,6 @@ paths:
       tags:
         - member
       summary: Add member
-      description: |-
-        Add a project member. The current user must be an administrator of the project.
       operationId: addMember
       parameters:
         - name: project
@@ -296,12 +271,11 @@ paths:
                   value:
                     code: 20
                     message: Project (:project) not found
-  /project/{project}/members/{user}:
+  /projects/{project}/members/{user}:
     get:
       tags:
         - member
       summary: Get member
-      description: Get a project member.
       operationId: getMember
       parameters:
         - name: project
@@ -344,7 +318,6 @@ paths:
       tags:
         - member
       summary: Update member
-      description: Update project membership. The current user must be a project administrator.
       operationId: updateMember
       parameters:
         - name: project
@@ -390,7 +363,6 @@ paths:
       tags:
         - member
       summary: Delete member
-      description: Remove a project member. The current user must be a project administrator. The project owner cannot be removed from the project.
       operationId: deleteMember
       parameters:
         - name: project
@@ -425,12 +397,11 @@ paths:
                   value:
                     code: 20
                     message: Member (:user) not found
-  /project/{project}/models:
+  /projects/{project}/models:
     get:
       tags:
         - model
       summary: Get models
-      description: List all models in a project.
       operationId: getModels
       parameters:
         - name: project
@@ -464,7 +435,6 @@ paths:
       tags:
         - model
       summary: Add model
-      description: Create a new model.
       operationId: addModel
       parameters:
         - name: project
@@ -510,12 +480,11 @@ paths:
                   value:
                     code: 20
                     message: Project (:project) not found
-  /project/{project}/models/{model}:
+  /projects/{project}/models/{model}:
     get:
       tags:
         - model
       summary: Get model
-      description: Get a model.
       operationId: getModel
       parameters:
         - name: project
@@ -558,7 +527,6 @@ paths:
       tags:
         - model
       summary: Update model
-      description: Update a model. The current user must be an administrator of the project.
       operationId: updateModel
       parameters:
         - name: project
@@ -604,7 +572,6 @@ paths:
       tags:
         - model
       summary: Delete model
-      description: Delete a model. The current user must be an administrator of the project.
       operationId: deleteModel
       parameters:
         - name: project
@@ -639,12 +606,11 @@ paths:
                   value:
                     code: 20
                     message: Model (:model) not found
-  /project/{project}/labels:
+  /projects/{project}/labels:
     get:
       tags:
         - label
       summary: Get labels
-      description: List all labels in a project.
       operationId: getLabels
       parameters:
         - name: project
@@ -678,7 +644,6 @@ paths:
       tags:
         - label
       summary: Add label
-      description: Creates a new label.
       operationId: addLabel
       parameters:
         - name: project
@@ -724,12 +689,11 @@ paths:
                   value:
                     code: 20
                     message: Project (:project) not found
-  /project/{project}/labels/{label}:
+  /projects/{project}/labels/{label}:
     get:
       tags:
         - label
       summary: Get label
-      description: Get a label.
       operationId: getLabel
       parameters:
         - name: project
@@ -772,7 +736,6 @@ paths:
       tags:
         - label
       summary: Update label
-      description: Update an existing label
       operationId: updateLabel
       parameters:
         - name: project
@@ -802,7 +765,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Model'
+                $ref: '#/components/schemas/Label'
         '404':
           description: Not found
           content:
@@ -818,7 +781,6 @@ paths:
       tags:
         - label
       summary: Delete label
-      description: Delete a label.
       operationId: deleteLabel
       parameters:
         - name: project
@@ -828,7 +790,7 @@ paths:
           schema:
             type: integer
             format: int64
-        - name: model
+        - name: label
           in: path
           description: ID of label to delete
           required: true
@@ -841,7 +803,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Model'
+                $ref: '#/components/schemas/Label'
         '404':
           description: Not found
           content:
