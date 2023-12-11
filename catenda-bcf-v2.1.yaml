@@ -25,10 +25,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Issue Board'
-      security:
-        - catenda_auth:
-            - write:projects
-            - read:projects
     post:
       tags:
         - issue-board
@@ -48,10 +44,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Issue Board'          
-      security:
-        - catenda_auth:
-            - write:projects
-            - read:projects
   /projects/{project}:
     get:
       tags:
@@ -75,10 +67,6 @@ paths:
                 $ref: '#/components/schemas/Issue Board'
         '404':
           description: Project (:project) not found
-      security:
-        - catenda_auth:  
-            - write:project
-            - read:project
     put:
       tags:
         - issue-board
@@ -112,10 +100,6 @@ paths:
           description: Project (:project) not found
         '422':
           description: Message from input validation
-      security:
-        - catenda_auth:
-            - write:projects
-            - read:projects
   /projects/{project}/topics:
     get:
       tags:
@@ -850,12 +834,3 @@ components:
               format: int32
             message:
               type: string
-  securitySchemes:
-    catenda_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: https://api.catenda.com/oauth2/authorize
-          scopes:
-            write:projects: modify projects
-            read:projects: read projects
