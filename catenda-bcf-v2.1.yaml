@@ -5,15 +5,15 @@ info:
 servers:
   - url: https://api.catenda.com/opencde/bcf/3.0
 tags:
-  - name: topic
-  - name: comment
-  - name: document
-  - name: issue-board
+  - name: Topic
+  - name: Comment
+  - name: Document
+  - name: Issue Board
 paths:
   /projects:
     get:
       tags:
-        - issue-board
+        - Issue Board
       summary: Get issue boards
       operationId: listProjects
       responses:
@@ -27,7 +27,7 @@ paths:
                   $ref: '#/components/schemas/Issue Board'
     post:
       tags:
-        - issue-board
+        - Issue Board
       summary: Create issue board
       operationId: addProject
       requestBody:
@@ -47,7 +47,7 @@ paths:
   /projects/{project}:
     get:
       tags:
-        - issue-board
+        - Issue Board
       summary: Get issue board
       operationId: getProject
       parameters:
@@ -69,7 +69,7 @@ paths:
           description: Project (:project) not found
     put:
       tags:
-        - issue-board
+        - Issue Board
       summary: Update issue board
       operationId: updateProject
       parameters:
@@ -103,7 +103,7 @@ paths:
   /projects/{project}/topics:
     get:
       tags:
-        - topic
+        - Topic
       summary: Get topics
       operationId: getTopics
       parameters:
@@ -136,7 +136,7 @@ paths:
                     message: Project (:project) not found
     post:
       tags:
-        - topic
+        - Topic
       summary: Add topic
       operationId: addTopic
       parameters:
@@ -186,7 +186,7 @@ paths:
   /projects/{project}/topics/{topic}:
     get:
       tags:
-        - topic
+        - Topic
       summary: Get topic
       operationId: getTopic
       parameters:
@@ -228,7 +228,7 @@ paths:
                     message: Topic (:topic) not found
     put:
       tags:
-        - topic
+        - Topic
       summary: Update topic
       operationId: updateMember
       parameters:
@@ -273,7 +273,7 @@ paths:
                     message: Topic (:topic) not found
     delete:
       tags:
-        - topic
+        - Topic
       summary: Delete topic
       operationId: deleteTopic
       parameters:
@@ -308,7 +308,7 @@ paths:
   /projects/{project}/topics/{topic}/comments:
     get:
       tags:
-        - comment
+        - Comment
       summary: Get comments
       operationId: getComments
       parameters:
@@ -352,7 +352,7 @@ paths:
                     message: Topic (:topic) not found
     post:
       tags:
-        - comment
+        - Comment
       summary: Add comment
       operationId: addComment
       parameters:
@@ -413,7 +413,7 @@ paths:
   /projects/{project}/topics/{topic}/comments/{comment}:
     get:
       tags:
-        - comment
+        - Comment
       summary: Get comment
       operationId: getComment
       parameters:
@@ -455,7 +455,7 @@ paths:
                     message: Topic (:topic) not found
     put:
       tags:
-        - comment
+        - Comment
       summary: Update comment
       operationId: updateComment
       parameters:
@@ -504,7 +504,7 @@ paths:
                     message: Topic (:topic) not found
     delete:
       tags:
-        - comment
+        - Comment
       summary: Delete comment
       operationId: deleteModel
       parameters:
@@ -547,7 +547,7 @@ paths:
   /projects/{project}/documents:
     get:
       tags:
-        - document
+        - Document
       summary: Get documents
       operationId: getDocuments
       parameters:
@@ -580,7 +580,7 @@ paths:
                     message: Project (:project) not found
     post:
       tags:
-        - document
+        - Document
       summary: Add document
       operationId: addDocument
       parameters:
@@ -630,7 +630,7 @@ paths:
   /projects/{project}/documents/{document}:
     get:
       tags:
-        - document
+        - Document
       summary: Get document
       operationId: getDocument
       parameters:
@@ -672,7 +672,7 @@ paths:
                     message: Document (:document) not found
     put:
       tags:
-        - document
+        - Document
       summary: Update document
       operationId: updateDocument
       parameters:
@@ -717,7 +717,7 @@ paths:
                     message: Document (:document) not found
     delete:
       tags:
-        - document
+        - Document
       summary: Delete document
       operationId: deleteDocument
       parameters:

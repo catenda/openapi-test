@@ -8,15 +8,15 @@ externalDocs:
 servers:
   - url: https://api.catenda.com/v2
 tags:
-  - name: project
-  - name: member
-  - name: model
-  - name: label
+  - name: Project
+  - name: Member
+  - name: Model
+  - name: Label
 paths:
   /projects:
     get:
       tags:
-        - project
+        - Project
       summary: List projects
       operationId: listProjects
       responses:
@@ -34,7 +34,7 @@ paths:
             - read:projects
     post:
       tags:
-        - project
+        - Project
       summary: Create project
       operationId: addProject
       requestBody:
@@ -77,7 +77,7 @@ paths:
   /projects/{project}:
     get:
       tags:
-        - project
+        - Project
       summary: Get project
       operationId: getProject
       parameters:
@@ -103,7 +103,7 @@ paths:
             - read:project
     put:
       tags:
-        - project
+        - Project
       summary: Update  project
       operationId: updateProject
       parameters:
@@ -140,7 +140,7 @@ paths:
             - read:projects
     delete:
       tags:
-        - project
+        - Project
       summary: Delete project
       operationId: deleteProject
       parameters:
@@ -163,7 +163,7 @@ paths:
   /projects/{project}/members:
     get:
       tags:
-        - member
+        - Member
       summary: Get members
       description: List project members.
       operationId: getMembers
@@ -197,7 +197,7 @@ paths:
                     message: Project (:project) not found
     post:
       tags:
-        - member
+        - Member
       summary: Add member
       operationId: addMember
       parameters:
@@ -274,7 +274,7 @@ paths:
   /projects/{project}/members/{user}:
     get:
       tags:
-        - member
+        - Member
       summary: Get member
       operationId: getMember
       parameters:
@@ -316,7 +316,7 @@ paths:
                     message: Member (:user) not found
     put:
       tags:
-        - member
+        - Member
       summary: Update member
       operationId: updateMember
       parameters:
@@ -361,7 +361,7 @@ paths:
                     message: Member (:user) not found
     delete:
       tags:
-        - member
+        - Member
       summary: Delete member
       operationId: deleteMember
       parameters:
@@ -400,7 +400,7 @@ paths:
   /projects/{project}/models:
     get:
       tags:
-        - model
+        - Model
       summary: Get models
       operationId: getModels
       parameters:
@@ -433,7 +433,7 @@ paths:
                     message: Project (:project) not found
     post:
       tags:
-        - model
+        - Model
       summary: Add model
       operationId: addModel
       parameters:
@@ -483,7 +483,7 @@ paths:
   /projects/{project}/models/{model}:
     get:
       tags:
-        - model
+        - Model
       summary: Get model
       operationId: getModel
       parameters:
@@ -525,7 +525,7 @@ paths:
                     message: Model (:model) not found
     put:
       tags:
-        - model
+        - Model
       summary: Update model
       operationId: updateModel
       parameters:
@@ -570,7 +570,7 @@ paths:
                     message: Model (:model) not found
     delete:
       tags:
-        - model
+        - Model
       summary: Delete model
       operationId: deleteModel
       parameters:
@@ -609,7 +609,7 @@ paths:
   /projects/{project}/labels:
     get:
       tags:
-        - label
+        - Label
       summary: Get labels
       operationId: getLabels
       parameters:
@@ -642,7 +642,7 @@ paths:
                     message: Project (:project) not found
     post:
       tags:
-        - label
+        - Label
       summary: Add label
       operationId: addLabel
       parameters:
@@ -692,7 +692,7 @@ paths:
   /projects/{project}/labels/{label}:
     get:
       tags:
-        - label
+        - Label
       summary: Get label
       operationId: getLabel
       parameters:
@@ -734,7 +734,7 @@ paths:
                     message: Label (:label) not found
     put:
       tags:
-        - label
+        - Label
       summary: Update label
       operationId: updateLabel
       parameters:
@@ -779,7 +779,7 @@ paths:
                     message: Label (:label) not found
     delete:
       tags:
-        - label
+        - Label
       summary: Delete label
       operationId: deleteLabel
       parameters:
