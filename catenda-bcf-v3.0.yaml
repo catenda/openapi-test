@@ -25,6 +25,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Issue Board'
+      security:
+        - authorizationHeader: []
     post:
       tags:
         - Issue Board
@@ -43,7 +45,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Issue Board'          
+                $ref: '#/components/schemas/Issue Board'    
+      security:
+        - authorizationHeader: []
   /projects/{project}:
     get:
       tags:
@@ -67,6 +71,8 @@ paths:
                 $ref: '#/components/schemas/Issue Board'
         '404':
           description: Project (:project) not found
+      security:
+        - authorizationHeader: []
     put:
       tags:
         - Issue Board
@@ -100,6 +106,8 @@ paths:
           description: Project (:project) not found
         '422':
           description: Message from input validation
+      security:
+        - authorizationHeader: []
   /projects/{project}/topics:
     get:
       tags:
@@ -134,6 +142,8 @@ paths:
                   value:
                     code: 20
                     message: Project (:project) not found
+      security:
+        - authorizationHeader: []
     post:
       tags:
         - Topic
@@ -183,6 +193,8 @@ paths:
                   value:
                     code: 20
                     message: Project (:project) not found
+      security:
+        - authorizationHeader: []
   /projects/{project}/topics/{topic}:
     get:
       tags:
@@ -226,6 +238,8 @@ paths:
                   value:
                     code: 20
                     message: Topic (:topic) not found
+      security:
+        - authorizationHeader: []
     put:
       tags:
         - Topic
@@ -271,6 +285,8 @@ paths:
                   value:
                     code: 20
                     message: Topic (:topic) not found
+      security:
+        - authorizationHeader: []
     delete:
       tags:
         - Topic
@@ -305,6 +321,8 @@ paths:
                   value:
                     code: 20
                     message: Topic (:topic) not found
+      security:
+          - authorizationHeader: []
   /projects/{project}/topics/{topic}/comments:
     get:
       tags:
@@ -350,6 +368,8 @@ paths:
                   value:
                     code: 20
                     message: Topic (:topic) not found
+      security:
+        - authorizationHeader: []
     post:
       tags:
         - Comment
@@ -410,6 +430,8 @@ paths:
                   value:
                     code: 20
                     message: Topic (:topic) not found
+      security:
+        - authorizationHeader: []
   /projects/{project}/topics/{topic}/comments/{comment}:
     get:
       tags:
@@ -453,6 +475,8 @@ paths:
                   value:
                     code: 20
                     message: Topic (:topic) not found
+      security:
+        - authorizationHeader: []
     put:
       tags:
         - Comment
@@ -502,6 +526,8 @@ paths:
                   value:
                     code: 20
                     message: Topic (:topic) not found
+      security:
+        - authorizationHeader: []
     delete:
       tags:
         - Comment
@@ -544,6 +570,8 @@ paths:
                   value:
                     code: 20
                     message: Topic (:topic) not found
+      security:
+        - authorizationHeader: []
   /projects/{project}/documents:
     get:
       tags:
@@ -578,6 +606,8 @@ paths:
                   value:
                     code: 20
                     message: Project (:project) not found
+      security:
+        - authorizationHeader: []
     post:
       tags:
         - Document
@@ -627,6 +657,8 @@ paths:
                   value:
                     code: 20
                     message: Project (:project) not found
+      security:
+        - authorizationHeader: []
   /projects/{project}/documents/{document}:
     get:
       tags:
@@ -670,6 +702,8 @@ paths:
                   value:
                     code: 20
                     message: Document (:document) not found
+      security:
+        - authorizationHeader: []
     put:
       tags:
         - Document
@@ -715,6 +749,8 @@ paths:
                   value:
                     code: 20
                     message: Document (:document) not found
+      security:
+        - authorizationHeader: []
     delete:
       tags:
         - Document
@@ -834,3 +870,8 @@ components:
               format: int32
             message:
               type: string
+  securitySchemes:
+    authorizationHeader:
+      type: apiKey
+      in: header
+      name: Authorization

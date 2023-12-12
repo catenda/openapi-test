@@ -29,9 +29,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Project'
       security:
-        - catenda_auth:
-            - write:projects
-            - read:projects
+        - authorizationHeader: []
     post:
       tags:
         - Project
@@ -71,9 +69,7 @@ paths:
         '422':
           description: Message from input validation
       security:
-        - catenda_auth:
-            - write:projects
-            - read:projects
+        - authorizationHeader: []
   /projects/{project}:
     get:
       tags:
@@ -98,9 +94,7 @@ paths:
         '404':
           description: Project (:project) not found
       security:
-        - catenda_auth:  
-            - write:project
-            - read:project
+        - authorizationHeader: []
     put:
       tags:
         - Project
@@ -135,9 +129,7 @@ paths:
         '422':
           description: Message from input validation
       security:
-        - catenda_auth:
-            - write:projects
-            - read:projects
+        - authorizationHeader: []
     delete:
       tags:
         - Project
@@ -157,9 +149,7 @@ paths:
         '404':
           description: Project (:project) not found
       security:
-        - catenda_auth:
-            - write:project
-            - read:project
+        - authorizationHeader: []
   /projects/{project}/members:
     get:
       tags:
@@ -195,6 +185,8 @@ paths:
                   value:
                     code: 20
                     message: Project (:project) not found
+      security:
+        - authorizationHeader: []
     post:
       tags:
         - Member
@@ -271,6 +263,8 @@ paths:
                   value:
                     code: 20
                     message: Project (:project) not found
+      security:
+        - authorizationHeader: []
   /projects/{project}/members/{user}:
     get:
       tags:
@@ -314,6 +308,8 @@ paths:
                   value:
                     code: 20
                     message: Member (:user) not found
+      security:
+        - authorizationHeader: []
     put:
       tags:
         - Member
@@ -359,6 +355,8 @@ paths:
                   value:
                     code: 20
                     message: Member (:user) not found
+      security:
+        - authorizationHeader: []
     delete:
       tags:
         - Member
@@ -397,6 +395,8 @@ paths:
                   value:
                     code: 20
                     message: Member (:user) not found
+      security:
+        - authorizationHeader: []
   /projects/{project}/models:
     get:
       tags:
@@ -431,6 +431,8 @@ paths:
                   value:
                     code: 20
                     message: Project (:project) not found
+      security:
+        - authorizationHeader: []
     post:
       tags:
         - Model
@@ -480,6 +482,8 @@ paths:
                   value:
                     code: 20
                     message: Project (:project) not found
+      security:
+        - authorizationHeader: []
   /projects/{project}/models/{model}:
     get:
       tags:
@@ -523,6 +527,8 @@ paths:
                   value:
                     code: 20
                     message: Model (:model) not found
+      security:
+        - authorizationHeader: []
     put:
       tags:
         - Model
@@ -568,6 +574,8 @@ paths:
                   value:
                     code: 20
                     message: Model (:model) not found
+      security:
+        - authorizationHeader: []
     delete:
       tags:
         - Model
@@ -606,6 +614,8 @@ paths:
                   value:
                     code: 20
                     message: Model (:model) not found
+      security:
+        - authorizationHeader: []
   /projects/{project}/labels:
     get:
       tags:
@@ -640,6 +650,8 @@ paths:
                   value:
                     code: 20
                     message: Project (:project) not found
+      security:
+        - authorizationHeader: []
     post:
       tags:
         - Label
@@ -689,6 +701,8 @@ paths:
                   value:
                     code: 20
                     message: Project (:project) not found
+      security:
+        - authorizationHeader: []
   /projects/{project}/labels/{label}:
     get:
       tags:
@@ -732,6 +746,8 @@ paths:
                   value:
                     code: 20
                     message: Label (:label) not found
+      security:
+        - authorizationHeader: []
     put:
       tags:
         - Label
@@ -777,6 +793,8 @@ paths:
                   value:
                     code: 20
                     message: Label (:label) not found
+      security:
+        - authorizationHeader: []
     delete:
       tags:
         - Label
@@ -916,11 +934,7 @@ components:
             message:
               type: string
   securitySchemes:
-    catenda_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: https://api.catenda.com/oauth2/authorize
-          scopes:
-            write:projects: modify projects that you are administrator
-            read:projects: read projects you are a member of
+    authorizationHeader:
+      type: apiKey
+      in: header
+      name: Authorization
