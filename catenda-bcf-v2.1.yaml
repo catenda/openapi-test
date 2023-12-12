@@ -26,7 +26,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Issue Board'
       security:
-        - authorizationHeader: []
+        - bearerAuth: []
     post:
       tags:
         - Issue Board
@@ -47,7 +47,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Issue Board'    
       security:
-        - authorizationHeader: []
+        - bearerAuth: []
   /projects/{project}:
     get:
       tags:
@@ -72,7 +72,7 @@ paths:
         '404':
           description: Project (:project) not found
       security:
-        - authorizationHeader: []
+        - bearerAuth: []
     put:
       tags:
         - Issue Board
@@ -107,7 +107,7 @@ paths:
         '422':
           description: Message from input validation
       security:
-        - authorizationHeader: []
+        - bearerAuth: []
   /projects/{project}/topics:
     get:
       tags:
@@ -143,7 +143,7 @@ paths:
                     code: 20
                     message: Project (:project) not found
       security:
-        - authorizationHeader: []
+        - bearerAuth: []
     post:
       tags:
         - Topic
@@ -194,7 +194,7 @@ paths:
                     code: 20
                     message: Project (:project) not found
       security:
-        - authorizationHeader: []
+        - bearerAuth: []
   /projects/{project}/topics/{topic}:
     get:
       tags:
@@ -239,7 +239,7 @@ paths:
                     code: 20
                     message: Topic (:topic) not found
       security:
-        - authorizationHeader: []
+        - bearerAuth: []
     put:
       tags:
         - Topic
@@ -286,7 +286,7 @@ paths:
                     code: 20
                     message: Topic (:topic) not found
       security:
-        - authorizationHeader: []
+        - bearerAuth: []
     delete:
       tags:
         - Topic
@@ -322,7 +322,7 @@ paths:
                     code: 20
                     message: Topic (:topic) not found
       security:
-          - authorizationHeader: []
+          - bearerAuth: []
   /projects/{project}/topics/{topic}/comments:
     get:
       tags:
@@ -369,7 +369,7 @@ paths:
                     code: 20
                     message: Topic (:topic) not found
       security:
-        - authorizationHeader: []
+        - bearerAuth: []
     post:
       tags:
         - Comment
@@ -431,7 +431,7 @@ paths:
                     code: 20
                     message: Topic (:topic) not found
       security:
-        - authorizationHeader: []
+        - bearerAuth: []
   /projects/{project}/topics/{topic}/comments/{comment}:
     get:
       tags:
@@ -476,7 +476,7 @@ paths:
                     code: 20
                     message: Topic (:topic) not found
       security:
-        - authorizationHeader: []
+        - bearerAuth: []
     put:
       tags:
         - Comment
@@ -527,7 +527,7 @@ paths:
                     code: 20
                     message: Topic (:topic) not found
       security:
-        - authorizationHeader: []
+        - bearerAuth: []
     delete:
       tags:
         - Comment
@@ -571,7 +571,7 @@ paths:
                     code: 20
                     message: Topic (:topic) not found
       security:
-        - authorizationHeader: []
+        - bearerAuth: []
   /projects/{project}/documents:
     get:
       tags:
@@ -607,7 +607,7 @@ paths:
                     code: 20
                     message: Project (:project) not found
       security:
-        - authorizationHeader: []
+        - bearerAuth: []
     post:
       tags:
         - Document
@@ -658,7 +658,7 @@ paths:
                     code: 20
                     message: Project (:project) not found
       security:
-        - authorizationHeader: []
+        - bearerAuth: []
   /projects/{project}/documents/{document}:
     get:
       tags:
@@ -703,7 +703,7 @@ paths:
                     code: 20
                     message: Document (:document) not found
       security:
-        - authorizationHeader: []
+        - bearerAuth: []
     put:
       tags:
         - Document
@@ -750,7 +750,7 @@ paths:
                     code: 20
                     message: Document (:document) not found
       security:
-        - authorizationHeader: []
+        - bearerAuth: []
     delete:
       tags:
         - Document
@@ -871,7 +871,7 @@ components:
             message:
               type: string
   securitySchemes:
-    authorizationHeader:
-      type: apiKey
-      in: header
-      name: Authorization
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: AccessToken
