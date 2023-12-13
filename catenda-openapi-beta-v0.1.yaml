@@ -29,7 +29,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Project'
       security:
-        - bearerAuth: []
+        - Bearer: []
     post:
       tags:
         - Project
@@ -69,7 +69,7 @@ paths:
         '422':
           description: Message from input validation
       security:
-        - bearerAuth: []
+        - Bearer: []
   /projects/{project}:
     get:
       tags:
@@ -93,7 +93,7 @@ paths:
         '404':
           description: Project (:project) not found
       security:
-        - bearerAuth: []
+        - Bearer: []
     put:
       tags:
         - Project
@@ -127,7 +127,7 @@ paths:
         '422':
           description: Message from input validation
       security:
-        - bearerAuth: []
+        - Bearer: []
     delete:
       tags:
         - Project
@@ -146,7 +146,7 @@ paths:
         '404':
           description: Project (:project) not found
       security:
-        - bearerAuth: []
+        - Bearer: []
   /projects/{project}/members:
     get:
       tags:
@@ -182,7 +182,7 @@ paths:
                     code: 20
                     message: Project (:project) not found
       security:
-        - bearerAuth: []
+        - Bearer: []
     post:
       tags:
         - Member
@@ -259,7 +259,7 @@ paths:
                     code: 20
                     message: Project (:project) not found
       security:
-        - bearerAuth: []
+        - Bearer: []
   /projects/{project}/members/{user}:
     get:
       tags:
@@ -302,7 +302,7 @@ paths:
                     code: 20
                     message: Member (:user) not found
       security:
-        - bearerAuth: []
+        - Bearer: []
     put:
       tags:
         - Member
@@ -347,7 +347,7 @@ paths:
                     code: 20
                     message: Member (:user) not found
       security:
-        - bearerAuth: []
+        - Bearer: []
     delete:
       tags:
         - Member
@@ -385,7 +385,7 @@ paths:
                     code: 20
                     message: Member (:user) not found
       security:
-        - bearerAuth: []
+        - Bearer: []
   /projects/{project}/models:
     get:
       tags:
@@ -420,7 +420,7 @@ paths:
                     code: 20
                     message: Project (:project) not found
       security:
-        - bearerAuth: []
+        - Bearer: []
     post:
       tags:
         - Model
@@ -470,7 +470,7 @@ paths:
                     code: 20
                     message: Project (:project) not found
       security:
-        - bearerAuth: []
+        - Bearer: []
   /projects/{project}/models/{model}:
     get:
       tags:
@@ -513,7 +513,7 @@ paths:
                     code: 20
                     message: Model (:model) not found
       security:
-        - bearerAuth: []
+        - Bearer: []
     put:
       tags:
         - Model
@@ -558,7 +558,7 @@ paths:
                     code: 20
                     message: Model (:model) not found
       security:
-        - bearerAuth: []
+        - Bearer: []
     delete:
       tags:
         - Model
@@ -596,7 +596,7 @@ paths:
                     code: 20
                     message: Model (:model) not found
       security:
-        - bearerAuth: []
+        - Bearer: []
   /projects/{project}/labels:
     get:
       tags:
@@ -631,7 +631,7 @@ paths:
                     code: 20
                     message: Project (:project) not found
       security:
-        - bearerAuth: []
+        - Bearer: []
     post:
       tags:
         - Label
@@ -681,7 +681,7 @@ paths:
                     code: 20
                     message: Project (:project) not found
       security:
-        - bearerAuth: []
+        - Bearer: []
   /projects/{project}/labels/{label}:
     get:
       tags:
@@ -724,7 +724,7 @@ paths:
                     code: 20
                     message: Label (:label) not found
       security:
-        - bearerAuth: []
+        - Bearer: []
     put:
       tags:
         - Label
@@ -769,7 +769,7 @@ paths:
                     code: 20
                     message: Label (:label) not found
       security:
-        - bearerAuth: []
+        - Bearer: []
     delete:
       tags:
         - Label
@@ -902,7 +902,7 @@ components:
             message:
               type: string
   securitySchemes:
-    bearerAuth:
+    Bearer:
       type: http
       scheme: bearer
       bearerFormat: AccessToken
