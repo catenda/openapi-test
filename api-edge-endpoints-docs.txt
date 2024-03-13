@@ -83,4 +83,3 @@
 /v2/scim/v2/ResourceTypes
 /v2/scim/v2/Users
 /v2/scim/v2/Users/:id
-
