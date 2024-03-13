@@ -1,0 +1,7075 @@
+---
+openapi: 3.0.3
+info:
+  title: Generated API
+  version: "1.0"
+paths:
+  /:
+    get:
+      responses:
+        "200":
+          description: OK
+  /application.wadl:
+    get:
+      responses:
+        "200":
+          description: OK
+  /application.wadl/{path}:
+    get:
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/2.1/auth:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthGET2'
+  /bcf/2.1/bimsync-projects/{bimsync_project_id}/topics:
+    get:
+      parameters:
+      - name: bimsync_project_id
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/ProjectRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/2.1/current-user:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserGET2'
+  /bcf/2.1/projects:
+    get:
+      parameters:
+      - name: bimsync_archived
+        in: query
+        schema:
+          type: string
+      - name: bimsync_project_id
+        in: query
+        schema:
+          $ref: '#/components/schemas/ProjectRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectGET1'
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectGET1'
+  /bcf/2.1/projects/{project}:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectGET1'
+    put:
+      parameters:
+      - name: project
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/ProjectPUT1'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectGET1'
+  /bcf/2.1/projects/{project}/documents:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DocumentGET1'
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentGET1'
+  /bcf/2.1/projects/{project}/documents/{document}:
+    get:
+      parameters:
+      - name: document
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/DocumentId'
+      responses:
+        "200":
+          description: OK
+    delete:
+      parameters:
+      - name: document
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/DocumentId'
+      responses:
+        "200":
+          description: OK
+  /bcf/2.1/projects/{project}/extensions:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtensionsGET1'
+    put:
+      responses:
+        "200":
+          description: OK
+    post:
+      responses:
+        "200":
+          description: OK
+  /bcf/2.1/projects/{project}/extensions/labels:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LabelGET'
+  /bcf/2.1/projects/{project}/extensions/priorities:
+    get:
+      parameters:
+      - name: include-unlinked
+        in: query
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PriorityGET'
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriorityGET'
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriorityGET'
+    delete:
+      responses:
+        "204":
+          description: No Content
+  /bcf/2.1/projects/{project}/extensions/priorities/link:
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriorityGET'
+  /bcf/2.1/projects/{project}/extensions/statuses:
+    get:
+      parameters:
+      - name: include-unlinked
+        in: query
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StatusGET'
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusGET'
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusGET'
+    delete:
+      responses:
+        "204":
+          description: No Content
+  /bcf/2.1/projects/{project}/extensions/statuses/link:
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusGET'
+  /bcf/2.1/projects/{project}/extensions/types:
+    get:
+      parameters:
+      - name: include-unlinked
+        in: query
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TypeGET'
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TypeGET'
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TypeGET'
+    delete:
+      responses:
+        "204":
+          description: No Content
+  /bcf/2.1/projects/{project}/extensions/types/link:
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TypeGET'
+  /bcf/2.1/projects/{project}/extensions/users:
+    get:
+      parameters:
+      - name: include-unlinked
+        in: query
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserGET1'
+  /bcf/2.1/projects/{project}/extensions/users/link:
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserGET1'
+  /bcf/2.1/projects/{project}/import:
+    post:
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "200":
+          description: OK
+  /bcf/2.1/projects/{project}/points:
+    get:
+      responses:
+        "200":
+          description: OK
+  /bcf/2.1/projects/{project}/topics:
+    get:
+      parameters:
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+    post:
+      parameters:
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/2.1/projects/{project}/topics/events:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TopicEventGET'
+  /bcf/2.1/projects/{project}/topics/{topic}:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicGET1'
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+    delete:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+  /bcf/2.1/projects/{project}/topics/{topic}/comments:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommentGET1'
+    post:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/2.1/projects/{project}/topics/{topic}/comments/{comment}:
+    get:
+      parameters:
+      - name: comment
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueCommentRef'
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentGET1'
+    put:
+      parameters:
+      - name: comment
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueCommentRef'
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentGET1'
+    delete:
+      parameters:
+      - name: comment
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueCommentRef'
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+  /bcf/2.1/projects/{project}/topics/{topic}/document_references:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DocumentReferenceGET1'
+    post:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentReferenceGET1'
+  /bcf/2.1/projects/{project}/topics/{topic}/document_references/{document-reference}:
+    put:
+      parameters:
+      - name: document-reference
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentReferenceGET1'
+    delete:
+      parameters:
+      - name: document-reference
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+  /bcf/2.1/projects/{project}/topics/{topic}/events:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TopicEventGET'
+  /bcf/2.1/projects/{project}/topics/{topic}/objects:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ObjectGET'
+    post:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ObjectGET'
+    delete:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "204":
+          description: No Content
+  /bcf/2.1/projects/{project}/topics/{topic}/points:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PointGET'
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PointGET'
+    post:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PointGET'
+    delete:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "204":
+          description: No Content
+  /bcf/2.1/projects/{project}/topics/{topic}/related_topics:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeBimsyncProjectTopics
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RelatedTopicGET'
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeBimsyncProjectTopics
+        in: query
+        schema:
+          type: string
+      - name: replace
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RelatedTopicGET'
+  /bcf/2.1/projects/{project}/topics/{topic}/related_topics/{related-topic}:
+    delete:
+      parameters:
+      - name: related-topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeBimsyncProjectTopics
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/2.1/projects/{project}/topics/{topic}/viewpoints:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: $select
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ViewpointGET1'
+    post:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: $select
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/2.1/projects/{project}/topics/{topic}/viewpoints/{viewpoint}:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: $select
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewpointGET1'
+  /bcf/2.1/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/bitmaps/{bitmap}:
+    get:
+      parameters:
+      - name: bitmap
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/2.1/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/coloring:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ColoringGET'
+  /bcf/2.1/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/models:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ViewpointModel'
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ViewpointModel'
+  /bcf/2.1/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/query:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bimsync_query
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/2.1/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/selection:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelectionGET'
+  /bcf/2.1/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/snapshot:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bimsync-image-size
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/2.1/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/visibility:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisibilityGET'
+  /bcf/3.0/bimsync-projects/{bimsync_project_id}/topics:
+    get:
+      parameters:
+      - name: bimsync_project_id
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/ProjectRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/3.0/projects:
+    get:
+      parameters:
+      - name: $fields
+        in: query
+        schema:
+          type: string
+      - name: bimsync_archived
+        in: query
+        schema:
+          type: string
+      - name: bimsync_project_id
+        in: query
+        schema:
+          $ref: '#/components/schemas/ProjectRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectGET2'
+    post:
+      parameters:
+      - name: $fields
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectGET2'
+  /bcf/3.0/projects/{project}:
+    get:
+      parameters:
+      - name: $fields
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectGET2'
+    put:
+      parameters:
+      - name: project
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/ProjectPUT2'
+      - name: $fields
+        in: query
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectGET2'
+  /bcf/3.0/projects/{project}/documents:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DocumentGET2'
+    post:
+      parameters:
+      - name: guid
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentGET2'
+  /bcf/3.0/projects/{project}/documents/{document}:
+    get:
+      parameters:
+      - name: document
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/DocumentId'
+      responses:
+        "200":
+          description: OK
+    delete:
+      parameters:
+      - name: document
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/DocumentId'
+      responses:
+        "200":
+          description: OK
+  /bcf/3.0/projects/{project}/exports:
+    post:
+      parameters:
+      - name: format
+        in: query
+        schema:
+          type: string
+      - name: generate-event-comments
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportInfoGET'
+  /bcf/3.0/projects/{project}/exports/{export}:
+    get:
+      parameters:
+      - name: export
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportInfoGET'
+  /bcf/3.0/projects/{project}/exports/{export}/download:
+    get:
+      parameters:
+      - name: export
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/3.0/projects/{project}/extensions:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtensionsGET2'
+    put:
+      responses:
+        "200":
+          description: OK
+    post:
+      responses:
+        "200":
+          description: OK
+  /bcf/3.0/projects/{project}/extensions/labels:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LabelGET'
+  /bcf/3.0/projects/{project}/extensions/priorities:
+    get:
+      parameters:
+      - name: include-unlinked
+        in: query
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PriorityGET'
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriorityGET'
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriorityGET'
+    delete:
+      responses:
+        "204":
+          description: No Content
+  /bcf/3.0/projects/{project}/extensions/priorities/link:
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriorityGET'
+  /bcf/3.0/projects/{project}/extensions/statuses:
+    get:
+      parameters:
+      - name: include-unlinked
+        in: query
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StatusGET'
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusGET'
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusGET'
+    delete:
+      responses:
+        "204":
+          description: No Content
+  /bcf/3.0/projects/{project}/extensions/statuses/link:
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusGET'
+  /bcf/3.0/projects/{project}/extensions/types:
+    get:
+      parameters:
+      - name: include-unlinked
+        in: query
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TypeGET'
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TypeGET'
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TypeGET'
+    delete:
+      responses:
+        "204":
+          description: No Content
+  /bcf/3.0/projects/{project}/extensions/types/link:
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TypeGET'
+  /bcf/3.0/projects/{project}/extensions/users:
+    get:
+      parameters:
+      - name: include-unlinked
+        in: query
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserGET1'
+  /bcf/3.0/projects/{project}/extensions/users/link:
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserGET1'
+  /bcf/3.0/projects/{project}/files_information:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectFileInformation'
+  /bcf/3.0/projects/{project}/imports:
+    post:
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportInfoGET'
+  /bcf/3.0/projects/{project}/imports/{import}:
+    get:
+      parameters:
+      - name: import
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportInfoGET'
+  /bcf/3.0/projects/{project}/points:
+    get:
+      responses:
+        "200":
+          description: OK
+  /bcf/3.0/projects/{project}/topics:
+    get:
+      parameters:
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+    post:
+      parameters:
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/3.0/projects/{project}/topics/events:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TopicEventGET1'
+  /bcf/3.0/projects/{project}/topics/{topic}:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicGET2'
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+    delete:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+    parameters:
+    - name: topic
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/IssueRef'
+    - name: includeAuthorization
+      in: query
+      schema:
+        type: string
+  /bcf/3.0/projects/{project}/topics/{topic}/comments:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommentGET2'
+    post:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/3.0/projects/{project}/topics/{topic}/comments/{comment}:
+    get:
+      parameters:
+      - name: comment
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueCommentRef'
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentGET2'
+    put:
+      parameters:
+      - name: comment
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueCommentRef'
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentGET2'
+    delete:
+      parameters:
+      - name: comment
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueCommentRef'
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+  /bcf/3.0/projects/{project}/topics/{topic}/document_references:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DocumentReferenceGET2'
+    post:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentReferenceGET2'
+  /bcf/3.0/projects/{project}/topics/{topic}/document_references/{document-reference}:
+    put:
+      parameters:
+      - name: document-reference
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentReferenceGET2'
+    delete:
+      parameters:
+      - name: document-reference
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+  /bcf/3.0/projects/{project}/topics/{topic}/events:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TopicEventGET1'
+  /bcf/3.0/projects/{project}/topics/{topic}/files:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FileGET'
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FileGET'
+  /bcf/3.0/projects/{project}/topics/{topic}/objects:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ObjectGET'
+    post:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ObjectGET'
+    delete:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "204":
+          description: No Content
+  /bcf/3.0/projects/{project}/topics/{topic}/points:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PointGET'
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PointGET'
+    post:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PointGET'
+    delete:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "204":
+          description: No Content
+  /bcf/3.0/projects/{project}/topics/{topic}/related_topics:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeBimsyncProjectTopics
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RelatedTopicGET1'
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeBimsyncProjectTopics
+        in: query
+        schema:
+          type: string
+      - name: replace
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RelatedTopicGET1'
+  /bcf/3.0/projects/{project}/topics/{topic}/related_topics/{related-topic}:
+    delete:
+      parameters:
+      - name: related-topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeBimsyncProjectTopics
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/3.0/projects/{project}/topics/{topic}/viewpoints:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: $select
+        in: query
+        schema:
+          type: string
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ViewpointGET2'
+    post:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: $select
+        in: query
+        schema:
+          type: string
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/3.0/projects/{project}/topics/{topic}/viewpoints/{viewpoint}:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: $select
+        in: query
+        schema:
+          type: string
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewpointGET2'
+    delete:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/3.0/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/bitmaps/{bitmap}:
+    get:
+      parameters:
+      - name: bitmap
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/3.0/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/coloring:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ColoringGET1'
+  /bcf/3.0/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/models:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ViewpointModel'
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ViewpointModel'
+  /bcf/3.0/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/selection:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelectionGET1'
+  /bcf/3.0/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/snapshot:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bimsync-image-size
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/3.0/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/visibility:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisibilityGET1'
+  /bcf/4.0/bimsync-projects/{bimsync_project_id}/topics:
+    get:
+      parameters:
+      - name: bimsync_project_id
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/ProjectRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/4.0/projects:
+    get:
+      parameters:
+      - name: $fields
+        in: query
+        schema:
+          type: string
+      - name: bimsync_archived
+        in: query
+        schema:
+          type: string
+      - name: bimsync_project_id
+        in: query
+        schema:
+          $ref: '#/components/schemas/ProjectRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectGET3'
+    post:
+      parameters:
+      - name: $fields
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectGET3'
+  /bcf/4.0/projects/{project}:
+    get:
+      parameters:
+      - name: $fields
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectGET3'
+    put:
+      parameters:
+      - name: project
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/ProjectPUT3'
+      - name: $fields
+        in: query
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectGET3'
+  /bcf/4.0/projects/{project}/documents:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DocumentGET3'
+    post:
+      parameters:
+      - name: guid
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentGET3'
+  /bcf/4.0/projects/{project}/documents/{document}:
+    get:
+      parameters:
+      - name: document
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/DocumentId'
+      responses:
+        "200":
+          description: OK
+    delete:
+      parameters:
+      - name: document
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/DocumentId'
+      responses:
+        "200":
+          description: OK
+  /bcf/4.0/projects/{project}/extensions:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtensionsGET3'
+    put:
+      responses:
+        "200":
+          description: OK
+    post:
+      responses:
+        "200":
+          description: OK
+  /bcf/4.0/projects/{project}/extensions/labels:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LabelGET'
+  /bcf/4.0/projects/{project}/extensions/priorities:
+    get:
+      parameters:
+      - name: include-unlinked
+        in: query
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PriorityGET'
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriorityGET'
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriorityGET'
+    delete:
+      responses:
+        "204":
+          description: No Content
+  /bcf/4.0/projects/{project}/extensions/priorities/link:
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriorityGET'
+  /bcf/4.0/projects/{project}/extensions/statuses:
+    get:
+      parameters:
+      - name: include-unlinked
+        in: query
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StatusGET'
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusGET'
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusGET'
+    delete:
+      responses:
+        "204":
+          description: No Content
+  /bcf/4.0/projects/{project}/extensions/statuses/link:
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusGET'
+  /bcf/4.0/projects/{project}/extensions/types:
+    get:
+      parameters:
+      - name: include-unlinked
+        in: query
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TypeGET'
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TypeGET'
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TypeGET'
+    delete:
+      responses:
+        "204":
+          description: No Content
+  /bcf/4.0/projects/{project}/extensions/types/link:
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TypeGET'
+  /bcf/4.0/projects/{project}/extensions/users:
+    get:
+      parameters:
+      - name: include-unlinked
+        in: query
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserGET1'
+  /bcf/4.0/projects/{project}/extensions/users/link:
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserGET1'
+  /bcf/4.0/projects/{project}/files_information:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectFileInformation1'
+  /bcf/4.0/projects/{project}/points:
+    get:
+      responses:
+        "200":
+          description: OK
+  /bcf/4.0/projects/{project}/topics:
+    get:
+      parameters:
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+    post:
+      parameters:
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/4.0/projects/{project}/topics/events:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TopicEventGET2'
+  /bcf/4.0/projects/{project}/topics/{topic}:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicGET3'
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+    delete:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+    parameters:
+    - name: topic
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/IssueRef'
+    - name: includeAuthorization
+      in: query
+      schema:
+        type: string
+  /bcf/4.0/projects/{project}/topics/{topic}/comments:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommentGET3'
+    post:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/4.0/projects/{project}/topics/{topic}/comments/{comment}:
+    get:
+      parameters:
+      - name: comment
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueCommentRef'
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentGET3'
+    put:
+      parameters:
+      - name: comment
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueCommentRef'
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentGET3'
+    delete:
+      parameters:
+      - name: comment
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueCommentRef'
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+  /bcf/4.0/projects/{project}/topics/{topic}/document_references:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DocumentReferenceGET3'
+    post:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentReferenceGET3'
+  /bcf/4.0/projects/{project}/topics/{topic}/document_references/{document-reference}:
+    put:
+      parameters:
+      - name: document-reference
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentReferenceGET3'
+    delete:
+      parameters:
+      - name: document-reference
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+  /bcf/4.0/projects/{project}/topics/{topic}/events:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TopicEventGET2'
+  /bcf/4.0/projects/{project}/topics/{topic}/files:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FileGET1'
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FileGET1'
+  /bcf/4.0/projects/{project}/topics/{topic}/objects:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ObjectGET'
+    post:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ObjectGET'
+    delete:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "204":
+          description: No Content
+  /bcf/4.0/projects/{project}/topics/{topic}/points:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PointGET'
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PointGET'
+    post:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PointGET'
+    delete:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "204":
+          description: No Content
+  /bcf/4.0/projects/{project}/topics/{topic}/related_topics:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeBimsyncProjectTopics
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RelatedTopicGET2'
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeBimsyncProjectTopics
+        in: query
+        schema:
+          type: string
+      - name: replace
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RelatedTopicGET2'
+  /bcf/4.0/projects/{project}/topics/{topic}/related_topics/{related-topic}:
+    delete:
+      parameters:
+      - name: related-topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: includeBimsyncProjectTopics
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/4.0/projects/{project}/topics/{topic}/viewpoints:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: $select
+        in: query
+        schema:
+          type: string
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ViewpointGET3'
+    post:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: $select
+        in: query
+        schema:
+          type: string
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/4.0/projects/{project}/topics/{topic}/viewpoints/{viewpoint}:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: $select
+        in: query
+        schema:
+          type: string
+      - name: includeAuthorization
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewpointGET3'
+    delete:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/4.0/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/bitmaps/{bitmap}:
+    get:
+      parameters:
+      - name: bitmap
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/4.0/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/coloring:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ColoringGET2'
+  /bcf/4.0/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/models:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ViewpointModel'
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ViewpointModel'
+  /bcf/4.0/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/selection:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelectionGET2'
+  /bcf/4.0/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/snapshot:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bimsync-image-size
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/4.0/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/visibility:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisibilityGET2'
+  /bcf/auth:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthGET1'
+  /bcf/projects/{project}/export:
+    post:
+      parameters:
+      - name: format
+        in: query
+        schema:
+          type: string
+      - name: generate-event-comments
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/versions:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionsGET1'
+  /bcf/{version}:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionGET'
+  /bcf/{version}/current-user:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserGET1'
+  /bcf/{version}/projects:
+    get:
+      parameters:
+      - name: bimsync_archived
+        in: query
+        schema:
+          type: string
+      - name: bimsync_project_id
+        in: query
+        schema:
+          $ref: '#/components/schemas/ProjectRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectGET'
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectGET'
+  /bcf/{version}/projects/{project}:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectGET'
+    put:
+      parameters:
+      - name: project
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/ProjectPUT'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectGET'
+  /bcf/{version}/projects/{project}/documents:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DocumentGET'
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentGET'
+  /bcf/{version}/projects/{project}/documents/{document}:
+    get:
+      parameters:
+      - name: document
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/DocumentId'
+      responses:
+        "200":
+          description: OK
+  /bcf/{version}/projects/{project}/export:
+    post:
+      parameters:
+      - name: generate-event-comments
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/{version}/projects/{project}/extensions:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtensionsGET'
+    put:
+      responses:
+        "200":
+          description: OK
+    post:
+      responses:
+        "200":
+          description: OK
+  /bcf/{version}/projects/{project}/extensions/labels:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LabelGET'
+  /bcf/{version}/projects/{project}/extensions/priorities:
+    get:
+      parameters:
+      - name: include-unlinked
+        in: query
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PriorityGET'
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriorityGET'
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriorityGET'
+    delete:
+      responses:
+        "204":
+          description: No Content
+  /bcf/{version}/projects/{project}/extensions/priorities/link:
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriorityGET'
+  /bcf/{version}/projects/{project}/extensions/statuses:
+    get:
+      parameters:
+      - name: include-unlinked
+        in: query
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StatusGET'
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusGET'
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusGET'
+    delete:
+      responses:
+        "204":
+          description: No Content
+  /bcf/{version}/projects/{project}/extensions/statuses/link:
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusGET'
+  /bcf/{version}/projects/{project}/extensions/types:
+    get:
+      parameters:
+      - name: include-unlinked
+        in: query
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TypeGET'
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TypeGET'
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TypeGET'
+    delete:
+      responses:
+        "204":
+          description: No Content
+  /bcf/{version}/projects/{project}/extensions/types/link:
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TypeGET'
+  /bcf/{version}/projects/{project}/extensions/users:
+    get:
+      parameters:
+      - name: include-unlinked
+        in: query
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserGET1'
+  /bcf/{version}/projects/{project}/extensions/users/link:
+    put:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserGET1'
+  /bcf/{version}/projects/{project}/import:
+    post:
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "200":
+          description: OK
+  /bcf/{version}/projects/{project}/points:
+    get:
+      responses:
+        "200":
+          description: OK
+  /bcf/{version}/projects/{project}/topics:
+    get:
+      responses:
+        "200":
+          description: OK
+    post:
+      responses:
+        "200":
+          description: OK
+  /bcf/{version}/projects/{project}/topics/events:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TopicEventGET'
+  /bcf/{version}/projects/{project}/topics/{topic}:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicGET'
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+    delete:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+  /bcf/{version}/projects/{project}/topics/{topic}/assigned-to:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicAssignee'
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicAssignee'
+  /bcf/{version}/projects/{project}/topics/{topic}/comments:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommentGET'
+    post:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+  /bcf/{version}/projects/{project}/topics/{topic}/comments/{comment}:
+    get:
+      parameters:
+      - name: comment
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueCommentRef'
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentGET'
+  /bcf/{version}/projects/{project}/topics/{topic}/document_references:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DocumentReferenceGET'
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentReferenceGET'
+  /bcf/{version}/projects/{project}/topics/{topic}/events:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TopicEventGET'
+  /bcf/{version}/projects/{project}/topics/{topic}/objects:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ObjectGET'
+    post:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "201":
+          description: Created
+    delete:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "204":
+          description: No Content
+  /bcf/{version}/projects/{project}/topics/{topic}/points:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PointGET'
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PointGET'
+    post:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PointGET'
+    delete:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "204":
+          description: No Content
+  /bcf/{version}/projects/{project}/topics/{topic}/requester:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueBoardRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicAssignee'
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicAssignee'
+  /bcf/{version}/projects/{project}/topics/{topic}/viewpoints:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ViewpointGET'
+    post:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      responses:
+        "200":
+          description: OK
+  /bcf/{version}/projects/{project}/topics/{topic}/viewpoints/{viewpoint}:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewpointGET'
+  /bcf/{version}/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/components:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ComponentGET'
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /bcf/{version}/projects/{project}/topics/{topic}/viewpoints/{viewpoint}/snapshot:
+    get:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+    put:
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IssueRef'
+      - name: viewpoint
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /documents/1.0/bimsync-project/{bimsync_project_id}/selected-documents/{token}:
+    get:
+      parameters:
+      - name: token
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelectedDocumentsGET'
+  /documents/1.0/bimsync-project/{bimsync_project_id}/upload-documents/{token}/initiate:
+    post:
+      parameters:
+      - name: token
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadInstructionsGET'
+  /documents/1.0/bimsync-project/{bimsync_project_id}/upload-documents/{token}/{session-file}/cancel:
+    post:
+      parameters:
+      - name: session-file
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: token
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /documents/1.0/bimsync-project/{bimsync_project_id}/upload-documents/{token}/{session-file}/commit:
+    post:
+      parameters:
+      - name: session-file
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: token
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentVersionGET'
+  /documents/1.0/bimsync-project/{bimsync_project_id}/{type}/{document}/versions:
+    get:
+      parameters:
+      - name: document
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentVersionsGET'
+  /documents/1.0/bimsync-project/{bimsync_project_id}/{type}/{document}/versions/{file}:
+    get:
+      parameters:
+      - name: document
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: file
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentVersionGET'
+  /documents/1.0/bimsync-project/{bimsync_project_id}/{type}/{document}/versions/{file}/download:
+    get:
+      parameters:
+      - name: document
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: file
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /documents/1.0/bimsync-project/{bimsync_project_id}/{type}/{document}/versions/{file}/metadata:
+    get:
+      parameters:
+      - name: document
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: file
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentMetadataGET'
+  /documents/1.0/document-versions:
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentListVersionsGET'
+  /documents/1.0/select-documents:
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelectDocumentsGET'
+  /documents/1.0/upload-documents:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPrincipal'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadDocumentsGET'
+  /foundation/1.0/auth:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthGET'
+  /foundation/1.0/current-user:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserGET'
+  /foundation/versions:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionsGET'
+  /health:
+    get:
+      responses:
+        "200":
+          description: OK
+  /lifecycle-hook-notification:
+    post:
+      responses:
+        "200":
+          description: OK
+  /unrestrictedhealth:
+    get:
+      responses:
+        "200":
+          description: OK
+components:
+  schemas:
+    AclId:
+      type: object
+      properties:
+        value:
+          format: int32
+          type: integer
+    AclScope:
+      enum:
+      - READ
+      - WRITE
+      - EDIT_ACL
+      type: string
+    Action:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        value:
+          type: string
+    Action1:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        value:
+          type: string
+    Action2:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        value:
+          $ref: '#/components/schemas/Value'
+    AdditionalHeaderGET:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    AdditionalHeadersGET:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdditionalHeaderGET'
+    ApiId:
+      enum:
+      - bcf
+      - foundation
+      - documents
+      type: string
+    AuthGET:
+      type: object
+      properties:
+        oauth2_auth_url:
+          type: string
+        oauth2_token_url:
+          type: string
+        oauth2_dynamic_client_reg_url:
+          type: string
+        http_basic_supported:
+          type: boolean
+        supported_oauth2_flows:
+          type: array
+          items:
+            type: string
+    AuthGET1:
+      required:
+      - oauth2_auth_url
+      - oauth2_token_url
+      type: object
+      properties:
+        oauth2_auth_url:
+          type: string
+        oauth2_token_url:
+          type: string
+        oauth2_dynamic_client_reg_url:
+          type: string
+    AuthGET2:
+      type: object
+      properties:
+        oauth2_auth_url:
+          type: string
+        oauth2_token_url:
+          type: string
+        oauth2_dynamic_client_reg_url:
+          type: string
+        http_basic_supported:
+          type: boolean
+        supported_oauth2_flows:
+          type: array
+          items:
+            type: string
+    Author:
+      required:
+      - id
+      - email
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+    Authorization:
+      type: object
+      properties:
+        comment_actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommentAction'
+    Authorization1:
+      type: object
+      properties:
+        project_actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectAction'
+    Authorization10:
+      type: object
+      properties:
+        viewpoint_actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ViewpointAction1'
+    Authorization2:
+      type: object
+      properties:
+        topic_actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopicAction'
+        topic_status:
+          type: array
+          items:
+            type: string
+    Authorization3:
+      type: object
+      properties:
+        comment_actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommentAction1'
+    Authorization4:
+      type: object
+      properties:
+        project_actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectAction1'
+    Authorization5:
+      type: object
+      properties:
+        topic_actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopicAction1'
+        topic_status:
+          type: array
+          items:
+            type: string
+    Authorization6:
+      type: object
+      properties:
+        viewpoint_actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ViewpointAction'
+    Authorization7:
+      type: object
+      properties:
+        comment_actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommentAction2'
+    Authorization8:
+      type: object
+      properties:
+        project_actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectAction2'
+    Authorization9:
+      type: object
+      properties:
+        topic_actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopicAction2'
+        topic_status:
+          type: array
+          items:
+            type: string
+    BimSnippet:
+      required:
+      - snippet_type
+      - is_external
+      - reference
+      - reference_schema
+      type: object
+      properties:
+        snippet_type:
+          type: string
+        is_external:
+          type: boolean
+        reference:
+          type: string
+        reference_schema:
+          type: string
+    BimSnippet1:
+      required:
+      - snippet_type
+      - is_external
+      - reference
+      - reference_schema
+      type: object
+      properties:
+        snippet_type:
+          type: string
+        is_external:
+          type: boolean
+        reference:
+          type: string
+        reference_schema:
+          type: string
+    BimSnippet2:
+      required:
+      - snippet_type
+      - is_external
+      - reference
+      - reference_schema
+      type: object
+      properties:
+        snippet_type:
+          type: string
+        is_external:
+          type: boolean
+        reference:
+          type: string
+        reference_schema:
+          type: string
+    Bitmap:
+      type: object
+      properties:
+        guid:
+          type: string
+        bitmap_type:
+          $ref: '#/components/schemas/BitmapType'
+        location:
+          $ref: '#/components/schemas/Location_'
+        normal:
+          $ref: '#/components/schemas/Normal'
+        up:
+          $ref: '#/components/schemas/Up'
+        height:
+          format: int32
+          type: integer
+    BitmapGET:
+      type: object
+      properties:
+        guid:
+          type: string
+        bitmap_type:
+          $ref: '#/components/schemas/BitmapType1'
+        location:
+          $ref: '#/components/schemas/Location1'
+        normal:
+          $ref: '#/components/schemas/Normal1'
+        up:
+          $ref: '#/components/schemas/Normal1'
+        height:
+          format: double
+          type: number
+    BitmapGET1:
+      type: object
+      properties:
+        guid:
+          type: string
+        bitmap_type:
+          $ref: '#/components/schemas/BitmapType2'
+        location:
+          $ref: '#/components/schemas/Location2'
+        normal:
+          $ref: '#/components/schemas/Normal2'
+        up:
+          $ref: '#/components/schemas/Normal2'
+        height:
+          format: double
+          type: number
+    BitmapGET2:
+      type: object
+      properties:
+        guid:
+          type: string
+        bitmap_type:
+          $ref: '#/components/schemas/BitmapType3'
+        location:
+          $ref: '#/components/schemas/Location3'
+        normal:
+          $ref: '#/components/schemas/Normal3'
+        up:
+          $ref: '#/components/schemas/Normal3'
+        height:
+          format: double
+          type: number
+    BitmapType:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: string
+    BitmapType1:
+      enum:
+      - jpg
+      - png
+      type: string
+    BitmapType2:
+      enum:
+      - jpg
+      - png
+      type: string
+    BitmapType3:
+      enum:
+      - jpg
+      - png
+      type: string
+    Bitmaps:
+      type: object
+      properties:
+        bitmap:
+          $ref: '#/components/schemas/Bitmap'
+    CameraDirection:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    CameraDirection_:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    CameraUpVector:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    CameraUpVector_:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    CameraViewPoint:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    CameraViewPoint_:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    Client:
+      type: object
+      properties:
+        ref:
+          type: string
+    ClientId:
+      type: object
+      properties:
+        value:
+          type: string
+        valid:
+          type: boolean
+    ClippingPlane:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/Location'
+        direction:
+          $ref: '#/components/schemas/Direction'
+    ClippingPlane1:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/Location1'
+        direction:
+          $ref: '#/components/schemas/Normal1'
+    ClippingPlane2:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/Location2'
+        direction:
+          $ref: '#/components/schemas/Normal2'
+    ClippingPlane3:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/Location3'
+        direction:
+          $ref: '#/components/schemas/Normal3'
+    ClippingPlanes:
+      type: object
+      properties:
+        clipping_plane:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClippingPlane'
+    Coloring:
+      type: object
+      properties:
+        color:
+          type: string
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component'
+    Coloring1:
+      type: object
+      properties:
+        color:
+          type: string
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component1'
+    Coloring2:
+      type: object
+      properties:
+        color:
+          type: string
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component2'
+    ColoringGET:
+      type: object
+      properties:
+        coloring:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coloring'
+    ColoringGET1:
+      type: object
+      properties:
+        coloring:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coloring1'
+    ColoringGET2:
+      type: object
+      properties:
+        coloring:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coloring2'
+    CommentAction:
+      enum:
+      - update
+      - delete
+      type: string
+    CommentAction1:
+      enum:
+      - update
+      - delete
+      type: string
+    CommentAction2:
+      enum:
+      - update
+      - delete
+      type: string
+    CommentGET:
+      required:
+      - guid
+      - status
+      - date
+      - author
+      - comment
+      - topic_guid
+      type: object
+      properties:
+        guid:
+          type: string
+        verbal_status:
+          type: string
+        status:
+          type: string
+        date:
+          type: string
+        author:
+          type: string
+        comment:
+          type: string
+        topic_guid:
+          type: string
+        viewpoint_guid:
+          type: string
+        reply_to_comment_guid:
+          type: string
+        modified_date:
+          type: string
+        modified_author:
+          type: string
+    CommentGET1:
+      required:
+      - guid
+      - date
+      - author
+      - comment
+      - topic_guid
+      type: object
+      properties:
+        guid:
+          type: string
+        date:
+          type: string
+        author:
+          type: string
+        comment:
+          type: string
+        topic_guid:
+          type: string
+        viewpoint_guid:
+          type: string
+        reply_to_comment_guid:
+          type: string
+        modified_date:
+          type: string
+        modified_author:
+          type: string
+        authorization:
+          $ref: '#/components/schemas/Authorization'
+    CommentGET2:
+      required:
+      - guid
+      - date
+      - author
+      - comment
+      - topic_guid
+      type: object
+      properties:
+        guid:
+          type: string
+        date:
+          type: string
+        author:
+          type: string
+        comment:
+          type: string
+        topic_guid:
+          type: string
+        viewpoint_guid:
+          type: string
+        modified_date:
+          type: string
+        modified_author:
+          type: string
+        authorization:
+          $ref: '#/components/schemas/Authorization3'
+    CommentGET3:
+      required:
+      - guid
+      - date
+      - comment
+      - topic_guid
+      type: object
+      properties:
+        guid:
+          type: string
+        date:
+          type: string
+        author:
+          $ref: '#/components/schemas/Author'
+        comment:
+          type: string
+        topic_guid:
+          type: string
+        viewpoint_guid:
+          type: string
+        modified_date:
+          type: string
+        modified_author:
+          $ref: '#/components/schemas/Author'
+        authorization:
+          $ref: '#/components/schemas/Authorization7'
+    Component:
+      type: object
+      properties:
+        ifc_guid:
+          type: string
+        originating_system:
+          type: string
+        authoring_tool_id:
+          type: string
+    Component1:
+      type: object
+      properties:
+        ifc_guid:
+          type: string
+        originating_system:
+          type: string
+        authoring_tool_id:
+          type: string
+    Component2:
+      type: object
+      properties:
+        ifc_guid:
+          type: string
+        originating_system:
+          type: string
+        authoring_tool_id:
+          type: string
+    ComponentGET:
+      type: object
+      properties:
+        ifc_guid:
+          type: string
+        selected:
+          type: boolean
+        visible:
+          type: boolean
+        color:
+          type: string
+        originating_system:
+          type: string
+        authoring_tool_id:
+          type: string
+    CustomField:
+      required:
+      - id
+      - name
+      - type
+      - readonly
+      - minArraySize
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type'
+        readonly:
+          type: boolean
+        minArraySize:
+          format: int32
+          type: integer
+        maxArraySize:
+          format: int32
+          type: integer
+        defaultValue:
+          type: array
+          items:
+            type: string
+        enumValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnumValue'
+    CustomField1:
+      type: object
+      properties:
+        id:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+    CustomFieldInstance:
+      type: object
+      properties:
+        ref:
+          $ref: '#/components/schemas/CustomFieldRef'
+        type:
+          $ref: '#/components/schemas/CustomFieldType'
+        defaultValue: {}
+        required:
+          type: boolean
+        disabled:
+          type: boolean
+    CustomFieldRef:
+      type: object
+      properties:
+        value:
+          type: string
+        shortValue:
+          type: string
+    CustomFieldType:
+      enum:
+      - TEXT
+      - INTEGER
+      - DOUBLE
+      - ENUMERATION
+      - DATE
+      type: string
+    Direction:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    DocumentGET:
+      required:
+      - guid
+      - filename
+      type: object
+      properties:
+        guid:
+          type: string
+        filename:
+          type: string
+    DocumentGET1:
+      required:
+      - guid
+      - filename
+      type: object
+      properties:
+        guid:
+          type: string
+        filename:
+          type: string
+    DocumentGET2:
+      required:
+      - guid
+      - filename
+      type: object
+      properties:
+        guid:
+          type: string
+        filename:
+          type: string
+    DocumentGET3:
+      required:
+      - guid
+      - filename
+      type: object
+      properties:
+        guid:
+          type: string
+        filename:
+          type: string
+    DocumentId:
+      type: object
+      properties:
+        value:
+          type: string
+    DocumentListVersionsGET:
+      type: object
+      properties:
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentVersionGET'
+    DocumentMetadataDataType:
+      enum:
+      - STRING
+      - BOOLEAN
+      - DATE_TIME
+      - DATE
+      - INTEGER32
+      - INTEGER64
+      type: string
+    DocumentMetadataEntry:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: array
+          items:
+            type: string
+        dataType:
+          $ref: '#/components/schemas/DocumentMetadataDataType'
+    DocumentMetadataGET:
+      type: object
+      properties:
+        metadata:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentMetadataEntry'
+    DocumentReferenceGET:
+      required:
+      - guid
+      type: object
+      properties:
+        guid:
+          type: string
+        referenced_document:
+          type: string
+        description:
+          type: string
+    DocumentReferenceGET1:
+      required:
+      - guid
+      type: object
+      properties:
+        guid:
+          type: string
+        document_guid:
+          type: string
+        url:
+          type: string
+        description:
+          type: string
+    DocumentReferenceGET2:
+      required:
+      - guid
+      type: object
+      properties:
+        guid:
+          type: string
+        document_guid:
+          type: string
+        url:
+          type: string
+        description:
+          type: string
+    DocumentReferenceGET3:
+      required:
+      - guid
+      type: object
+      properties:
+        guid:
+          type: string
+        document_guid:
+          type: string
+        url:
+          type: string
+        description:
+          type: string
+    DocumentToUploadGET:
+      type: object
+      properties:
+        sessionFileId:
+          type: string
+        uploadFileParts:
+          type: array
+          items:
+            $ref: '#/components/schemas/UploadFileInstructionsGET'
+        uploadCompletion:
+          $ref: '#/components/schemas/Link'
+        uploadCancellation:
+          $ref: '#/components/schemas/Link'
+    DocumentVersionGET:
+      type: object
+      properties:
+        links:
+          $ref: '#/components/schemas/DocumentVersionLinksGET'
+        documentId:
+          type: string
+        title:
+          type: string
+        versionNumber:
+          type: string
+        versionIndex:
+          format: int32
+          type: integer
+        creationDate:
+          type: string
+        fileDescription:
+          $ref: '#/components/schemas/FileDescriptionGET'
+    DocumentVersionLinksGET:
+      type: object
+      properties:
+        documentVersionDownload:
+          $ref: '#/components/schemas/Link'
+        documentVersion:
+          $ref: '#/components/schemas/Link'
+        documentVersions:
+          $ref: '#/components/schemas/Link'
+        documentVersionMetadata:
+          $ref: '#/components/schemas/Link'
+        documentDetails:
+          $ref: '#/components/schemas/Link'
+    DocumentVersionsGET:
+      type: object
+      properties:
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentVersionGET'
+    EndPoint:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    EnumValue:
+      required:
+      - value
+      - displayValue
+      - readonly
+      type: object
+      properties:
+        value:
+          type: string
+        displayValue:
+          type: string
+        readonly:
+          type: boolean
+    ExportInfoGET:
+      type: object
+      properties:
+        id:
+          type: string
+        createdAt:
+          type: string
+        status:
+          type: string
+    ExtensionItem:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    ExtensionItemGET:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    ExtensionsGET:
+      required:
+      - topic_type
+      - topic_status
+      - topic_label
+      - snippet_type
+      - priority
+      - user_id_type
+      type: object
+      properties:
+        topic_type:
+          type: array
+          items:
+            type: string
+        topic_status:
+          type: array
+          items:
+            type: string
+        topic_label:
+          type: array
+          items:
+            type: string
+        snippet_type:
+          type: array
+          items:
+            type: string
+        priority:
+          type: array
+          items:
+            type: string
+        user_id_type:
+          type: array
+          items:
+            type: string
+    ExtensionsGET1:
+      required:
+      - topic_type
+      - topic_status
+      - topic_label
+      - snippet_type
+      - priority
+      - user_id_type
+      - stage
+      type: object
+      properties:
+        topic_type:
+          type: array
+          items:
+            type: string
+        topic_status:
+          type: array
+          items:
+            type: string
+        topic_label:
+          type: array
+          items:
+            type: string
+        snippet_type:
+          type: array
+          items:
+            type: string
+        priority:
+          type: array
+          items:
+            type: string
+        user_id_type:
+          type: array
+          items:
+            type: string
+        stage:
+          type: array
+          items:
+            type: string
+        project_actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectAction'
+        topic_actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopicAction'
+        comment_actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommentAction'
+    ExtensionsGET2:
+      required:
+      - topic_type
+      - topic_status
+      - topic_label
+      - snippet_type
+      - priority
+      - users
+      - stage
+      type: object
+      properties:
+        topic_type:
+          type: array
+          items:
+            type: string
+        topic_status:
+          type: array
+          items:
+            type: string
+        topic_label:
+          type: array
+          items:
+            type: string
+        snippet_type:
+          type: array
+          items:
+            type: string
+        priority:
+          type: array
+          items:
+            type: string
+        users:
+          type: array
+          items:
+            type: string
+        stage:
+          type: array
+          items:
+            type: string
+        project_actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectAction1'
+        topic_actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopicAction1'
+        comment_actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommentAction1'
+    ExtensionsGET3:
+      required:
+      - topic_type
+      - topic_status
+      - topic_label
+      - priority
+      - users
+      - stage
+      type: object
+      properties:
+        topic_type:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExtensionItem'
+        topic_status:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopicStatus'
+        topic_label:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExtensionItem'
+        priority:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExtensionItem'
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User1'
+        stage:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExtensionItem'
+        project_actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectAction2'
+        topic_actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopicAction2'
+        comment_actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommentAction2'
+        relation_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationType'
+        custom_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomField'
+    FileDescriptionGET:
+      type: object
+      properties:
+        sizeInBytes:
+          format: int64
+          type: integer
+        name:
+          type: string
+    FileGET:
+      type: object
+      properties:
+        ifc_project:
+          type: string
+        ifc_spatial_structure_element:
+          type: string
+        filename:
+          type: string
+        date:
+          type: string
+        reference:
+          type: string
+    FileGET1:
+      type: object
+      properties:
+        ifc_project:
+          type: string
+        ifc_spatial_structure_element:
+          type: string
+        filename:
+          type: string
+        date:
+          type: string
+        reference:
+          type: string
+        id:
+          type: string
+    GrantedIssueBoardAccess:
+      type: object
+      properties:
+        scope:
+          $ref: '#/components/schemas/AclScope'
+        canCloseAllIssues:
+          type: boolean
+        canCloseOwnIssues:
+          type: boolean
+    ImportInfoGET:
+      type: object
+      properties:
+        id:
+          type: string
+        createdAt:
+          type: string
+        status:
+          type: string
+    IssueBoard:
+      type: object
+      properties:
+        collectionRef:
+          $ref: '#/components/schemas/IssueBoardCollectionRef'
+        ref:
+          $ref: '#/components/schemas/IssueBoardRef'
+        name:
+          type: string
+        description:
+          type: string
+        boardType:
+          $ref: '#/components/schemas/IssueBoardType'
+        statuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/IssueStatus'
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/IssueType'
+        priorities:
+          type: array
+          items:
+            $ref: '#/components/schemas/IssuePriority'
+        importStarted:
+          format: date
+          type: string
+          example: 2022-03-10
+        archived:
+          type: boolean
+        acl:
+          $ref: '#/components/schemas/AclId'
+        aclSettings:
+          $ref: '#/components/schemas/IssueBoardAclSettings'
+        isMail:
+          type: boolean
+        owner:
+          $ref: '#/components/schemas/UserRef'
+        createdBy:
+          $ref: '#/components/schemas/UserRef'
+        createdAt:
+          format: int64
+          type: integer
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomFieldInstance'
+        mail:
+          type: boolean
+    IssueBoardAclSettings:
+      type: object
+      properties:
+        closeAclEnabled:
+          type: boolean
+    IssueBoardCollectionRef:
+      type: object
+      properties:
+        value:
+          type: string
+        shortValue:
+          type: string
+    IssueBoardRef:
+      type: object
+      properties:
+        value:
+          type: string
+        shortValue:
+          type: string
+    IssueBoardRequest:
+      type: object
+      properties:
+        issueBoard:
+          $ref: '#/components/schemas/IssueBoard'
+        issueBoardRef:
+          $ref: '#/components/schemas/IssueBoardRef'
+        grantedIssueBoardScope:
+          $ref: '#/components/schemas/AclScope'
+        grantedIssueBoardAccess:
+          $ref: '#/components/schemas/GrantedIssueBoardAccess'
+        member:
+          $ref: '#/components/schemas/ProjectMember'
+        aggregatedRole:
+          $ref: '#/components/schemas/ProjectRole'
+        user:
+          $ref: '#/components/schemas/User'
+        userRef:
+          $ref: '#/components/schemas/UserRef'
+        requestType:
+          $ref: '#/components/schemas/UserRequestType'
+        onBehalfOfOrganization:
+          $ref: '#/components/schemas/OptionalUser'
+        cache:
+          $ref: '#/components/schemas/ObjectCache'
+        client:
+          $ref: '#/components/schemas/Client'
+        notificationsDisabled:
+          type: boolean
+        project:
+          $ref: '#/components/schemas/Project'
+        projectRef:
+          $ref: '#/components/schemas/ProjectRef'
+        projectId:
+          $ref: '#/components/schemas/ProjectId'
+        principal:
+          $ref: '#/components/schemas/UserPrincipal'
+        clientId:
+          $ref: '#/components/schemas/ClientId'
+    IssueBoardType:
+      enum:
+      - BCF_1
+      - BCF_2
+      type: string
+    IssueCommentRef:
+      type: object
+      properties:
+        value:
+          type: string
+        shortValue:
+          type: string
+    IssuePriority:
+      type: object
+      properties:
+        ref:
+          type: string
+        name:
+          type: string
+        color:
+          type: string
+        deleted:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+    IssueRef:
+      type: object
+      properties:
+        value:
+          type: string
+        shortValue:
+          type: string
+    IssueStatus:
+      type: object
+      properties:
+        ref:
+          type: string
+        name:
+          type: string
+        color:
+          type: string
+        deleted:
+          type: boolean
+        open:
+          type: boolean
+        type:
+          $ref: '#/components/schemas/IssueStatusType'
+    IssueStatusType:
+      enum:
+      - OPEN
+      - CLOSED
+      - CANDIDATE
+      type: string
+    IssueType:
+      type: object
+      properties:
+        ref:
+          type: string
+        name:
+          type: string
+        color:
+          type: string
+        deleted:
+          type: boolean
+    LabelGET:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        color:
+          type: string
+        deleted:
+          type: boolean
+    Line:
+      type: object
+      properties:
+        start_point:
+          $ref: '#/components/schemas/StartPoint'
+        end_point:
+          $ref: '#/components/schemas/EndPoint'
+    Line1:
+      type: object
+      properties:
+        start_point:
+          $ref: '#/components/schemas/StartPoint1'
+        end_point:
+          $ref: '#/components/schemas/StartPoint1'
+    Line2:
+      type: object
+      properties:
+        start_point:
+          $ref: '#/components/schemas/StartPoint2'
+        end_point:
+          $ref: '#/components/schemas/StartPoint2'
+    Line3:
+      type: object
+      properties:
+        start_point:
+          $ref: '#/components/schemas/StartPoint3'
+        end_point:
+          $ref: '#/components/schemas/StartPoint3'
+    Lines:
+      type: object
+      properties:
+        line:
+          type: array
+          items:
+            $ref: '#/components/schemas/Line'
+    Link:
+      type: object
+      properties:
+        url:
+          type: string
+    Location:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    Location1:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    Location2:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    Location3:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    Location_:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    Marker:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/StartPoint3'
+    MultipartFormDataGET:
+      type: object
+      properties:
+        prefix:
+          type: string
+        suffix:
+          type: string
+    Normal:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    Normal1:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    Normal2:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    Normal3:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    ObjectCache:
+      type: object
+    ObjectGET:
+      type: object
+      properties:
+        ifcGuid:
+          type: string
+    OptionalUser:
+      type: object
+      properties:
+        present:
+          type: boolean
+    OrthogonalCamera:
+      type: object
+      properties:
+        camera_view_point:
+          $ref: '#/components/schemas/CameraViewPoint'
+        camera_direction:
+          $ref: '#/components/schemas/CameraDirection'
+        camera_up_vector:
+          $ref: '#/components/schemas/CameraUpVector'
+        view_to_world_scale:
+          format: double
+          type: number
+    OrthogonalCamera1:
+      type: object
+      properties:
+        camera_view_point:
+          $ref: '#/components/schemas/StartPoint1'
+        camera_direction:
+          $ref: '#/components/schemas/Normal1'
+        camera_up_vector:
+          $ref: '#/components/schemas/Normal1'
+        view_to_world_scale:
+          format: double
+          type: number
+    OrthogonalCamera2:
+      type: object
+      properties:
+        camera_view_point:
+          $ref: '#/components/schemas/StartPoint2'
+        camera_direction:
+          $ref: '#/components/schemas/Normal2'
+        camera_up_vector:
+          $ref: '#/components/schemas/Normal2'
+        view_to_world_scale:
+          format: double
+          type: number
+        aspect_ratio:
+          format: double
+          type: number
+    OrthogonalCamera3:
+      type: object
+      properties:
+        camera_view_point:
+          $ref: '#/components/schemas/StartPoint3'
+        camera_direction:
+          $ref: '#/components/schemas/Normal3'
+        camera_up_vector:
+          $ref: '#/components/schemas/Normal3'
+        view_to_world_scale:
+          format: double
+          type: number
+        aspect_ratio:
+          format: double
+          type: number
+    PerspectiveCamera:
+      type: object
+      properties:
+        camera_view_point:
+          $ref: '#/components/schemas/CameraViewPoint_'
+        camera_direction:
+          $ref: '#/components/schemas/CameraDirection_'
+        camera_up_vector:
+          $ref: '#/components/schemas/CameraUpVector_'
+        field_of_view:
+          format: double
+          type: number
+    PerspectiveCamera1:
+      type: object
+      properties:
+        camera_view_point:
+          $ref: '#/components/schemas/StartPoint1'
+        camera_direction:
+          $ref: '#/components/schemas/Normal1'
+        camera_up_vector:
+          $ref: '#/components/schemas/Normal1'
+        field_of_view:
+          format: double
+          type: number
+    PerspectiveCamera2:
+      type: object
+      properties:
+        camera_view_point:
+          $ref: '#/components/schemas/StartPoint2'
+        camera_direction:
+          $ref: '#/components/schemas/Normal2'
+        camera_up_vector:
+          $ref: '#/components/schemas/Normal2'
+        field_of_view:
+          format: double
+          type: number
+        aspect_ratio:
+          format: double
+          type: number
+    PerspectiveCamera3:
+      type: object
+      properties:
+        camera_view_point:
+          $ref: '#/components/schemas/StartPoint3'
+        camera_direction:
+          $ref: '#/components/schemas/Normal3'
+        camera_up_vector:
+          $ref: '#/components/schemas/Normal3'
+        field_of_view:
+          format: double
+          type: number
+        aspect_ratio:
+          format: double
+          type: number
+    PointGET:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+        models:
+          type: array
+          items:
+            $ref: '#/components/schemas/PointModel'
+        spatialStructureBuildingId:
+          type: string
+        id:
+          type: string
+    PointModel:
+      type: object
+      properties:
+        modelRef:
+          type: string
+        revisionRef:
+          type: string
+        ref:
+          type: string
+    PriorityGET:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Project:
+      type: object
+      properties:
+        id:
+          format: int32
+          type: integer
+        ref:
+          $ref: '#/components/schemas/ProjectRef'
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/ProjectType'
+        description:
+          type: string
+        createdAt:
+          format: date
+          type: string
+          example: 2022-03-10
+        updatedAt:
+          format: date
+          type: string
+          example: 2022-03-10
+        deleted:
+          type: boolean
+        competition:
+          type: boolean
+    ProjectAction:
+      enum:
+      - update
+      - createTopic
+      - createDocument
+      type: string
+    ProjectAction1:
+      enum:
+      - update
+      - createTopic
+      - createDocument
+      type: string
+    ProjectAction2:
+      enum:
+      - update
+      - createTopic
+      - createDocument
+      type: string
+    ProjectFileDisplayInformation:
+      required:
+      - field_display_name
+      - field_value
+      type: object
+      properties:
+        field_display_name:
+          type: string
+        field_value:
+          type: string
+    ProjectFileDisplayInformation1:
+      required:
+      - field_display_name
+      - field_value
+      type: object
+      properties:
+        field_display_name:
+          type: string
+        field_value:
+          type: string
+    ProjectFileInformation:
+      type: object
+      properties:
+        display_information:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectFileDisplayInformation'
+        file:
+          $ref: '#/components/schemas/FileGET'
+    ProjectFileInformation1:
+      type: object
+      properties:
+        display_information:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectFileDisplayInformation1'
+        file:
+          $ref: '#/components/schemas/FileGET1'
+    ProjectGET:
+      required:
+      - project_id
+      - name
+      type: object
+      properties:
+        project_id:
+          type: string
+        name:
+          type: string
+    ProjectGET1:
+      required:
+      - project_id
+      - name
+      type: object
+      properties:
+        project_id:
+          type: string
+        name:
+          type: string
+        authorization:
+          $ref: '#/components/schemas/Authorization1'
+    ProjectGET2:
+      required:
+      - project_id
+      - name
+      type: object
+      properties:
+        project_id:
+          type: string
+        name:
+          type: string
+        authorization:
+          $ref: '#/components/schemas/Authorization4'
+    ProjectGET3:
+      required:
+      - project_id
+      - name
+      type: object
+      properties:
+        project_id:
+          type: string
+        name:
+          type: string
+        authorization:
+          $ref: '#/components/schemas/Authorization8'
+    ProjectId:
+      type: object
+      properties:
+        value:
+          format: int32
+          type: integer
+    ProjectMember:
+      type: object
+      properties:
+        userId:
+          format: int32
+          type: integer
+        role:
+          $ref: '#/components/schemas/ProjectRole'
+        isDeleted:
+          type: boolean
+        deleted:
+          type: boolean
+    ProjectPUT:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+    ProjectPUT1:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+    ProjectPUT2:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+    ProjectPUT3:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+    ProjectRef:
+      type: object
+      properties:
+        value:
+          type: string
+        shortValue:
+          type: string
+    ProjectRole:
+      enum:
+      - OWNER
+      - ADMIN
+      - MEMBER
+      type: string
+    ProjectType:
+      enum:
+      - PROJECT
+      - COMPETITION
+      - COMPETITION_ENTRY
+      - COMPETITION_REVIEW
+      - APP_PROJECT
+      type: string
+    RelatedTopicGET:
+      required:
+      - related_topic_guid
+      type: object
+      properties:
+        related_topic_guid:
+          type: string
+    RelatedTopicGET1:
+      required:
+      - related_topic_guid
+      type: object
+      properties:
+        related_topic_guid:
+          type: string
+    RelatedTopicGET2:
+      required:
+      - related_topic_guid
+      - relation_type
+      type: object
+      properties:
+        related_topic_guid:
+          type: string
+        relation_type:
+          $ref: '#/components/schemas/RelationType1'
+    RelationType:
+      enum:
+      - relates
+      - parent-child
+      type: string
+    RelationType1:
+      enum:
+      - relates
+      - parent
+      - child
+      type: string
+    SelectDocumentsGET:
+      type: object
+      properties:
+        selectDocumentsUrl:
+          type: string
+    SelectedDocumentsGET:
+      type: object
+      properties:
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentVersionGET'
+        serverContext:
+          type: string
+    SelectionGET:
+      type: object
+      properties:
+        selection:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component'
+    SelectionGET1:
+      type: object
+      properties:
+        selection:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component1'
+    SelectionGET2:
+      type: object
+      properties:
+        selection:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component2'
+    SnapshotGET:
+      type: object
+      properties:
+        snapshot_type:
+          $ref: '#/components/schemas/SnapshotType'
+    SnapshotGET1:
+      type: object
+      properties:
+        snapshot_type:
+          $ref: '#/components/schemas/SnapshotType1'
+    SnapshotGET2:
+      type: object
+      properties:
+        snapshot_type:
+          $ref: '#/components/schemas/SnapshotType2'
+    SnapshotType:
+      enum:
+      - jpg
+      - png
+      type: string
+    SnapshotType1:
+      enum:
+      - jpg
+      - png
+      type: string
+    SnapshotType2:
+      enum:
+      - jpg
+      - png
+      type: string
+    StartPoint:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    StartPoint1:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    StartPoint2:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    StartPoint3:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    StatusGET:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    StatusType:
+      enum:
+      - open
+      - closed
+      type: string
+    TopicAction:
+      enum:
+      - update
+      - updateBimSnippet
+      - updateRelatedTopics
+      - updateDocumentReferences
+      - updateFiles
+      - createComment
+      - createViewpoint
+      - delete
+      type: string
+    TopicAction1:
+      enum:
+      - update
+      - updateBimSnippet
+      - updateRelatedTopics
+      - updateDocumentReferences
+      - updateFiles
+      - createComment
+      - createViewpoint
+      - delete
+      type: string
+    TopicAction2:
+      enum:
+      - update
+      - updateRelatedTopics
+      - updateDocumentReferences
+      - updateFiles
+      - createComment
+      - createViewpoint
+      - delete
+      type: string
+    TopicAssignee:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/TopicUserGET'
+        team:
+          $ref: '#/components/schemas/TopicUserGET'
+    TopicEventGET:
+      required:
+      - topic_guid
+      - date
+      - author
+      type: object
+      properties:
+        topic_guid:
+          type: string
+        date:
+          type: string
+        author:
+          type: string
+        actions:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/Action'
+    TopicEventGET1:
+      required:
+      - topic_guid
+      - date
+      - author
+      type: object
+      properties:
+        topic_guid:
+          type: string
+        date:
+          type: string
+        author:
+          type: string
+        actions:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/Action1'
+    TopicEventGET2:
+      required:
+      - topic_guid
+      - date
+      type: object
+      properties:
+        topic_guid:
+          type: string
+        date:
+          type: string
+        author:
+          $ref: '#/components/schemas/Author'
+        actions:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/Action2'
+    TopicGET:
+      required:
+      - guid
+      - title
+      - creation_date
+      - creation_author
+      type: object
+      properties:
+        guid:
+          type: string
+        topic_type:
+          type: string
+        topic_status:
+          type: string
+        reference_link:
+          type: string
+        title:
+          type: string
+        priority:
+          type: string
+        index:
+          format: int32
+          type: integer
+        labels:
+          type: array
+          items:
+            type: string
+        creation_date:
+          type: string
+        creation_author:
+          type: string
+        modified_date:
+          type: string
+        modified_author:
+          type: string
+        assigned_to:
+          type: string
+        description:
+          type: string
+        bim_snippet:
+          $ref: '#/components/schemas/BimSnippet'
+    TopicGET1:
+      required:
+      - guid
+      - title
+      - creation_date
+      - creation_author
+      type: object
+      properties:
+        guid:
+          type: string
+        topic_type:
+          type: string
+        topic_status:
+          type: string
+        reference_links:
+          type: array
+          items:
+            type: string
+        title:
+          type: string
+        priority:
+          type: string
+        index:
+          format: int32
+          type: integer
+        labels:
+          type: array
+          items:
+            type: string
+        creation_date:
+          type: string
+        creation_author:
+          type: string
+        modified_date:
+          type: string
+        modified_author:
+          type: string
+        assigned_to:
+          type: string
+        stage:
+          type: string
+        description:
+          type: string
+        bim_snippet:
+          $ref: '#/components/schemas/BimSnippet1'
+        due_date:
+          type: string
+        authorization:
+          $ref: '#/components/schemas/Authorization2'
+    TopicGET2:
+      required:
+      - guid
+      - server_assigned_id
+      - title
+      - creation_date
+      - creation_author
+      type: object
+      properties:
+        guid:
+          type: string
+        server_assigned_id:
+          type: string
+        topic_type:
+          type: string
+        topic_status:
+          type: string
+        reference_links:
+          type: array
+          items:
+            type: string
+        title:
+          type: string
+        priority:
+          type: string
+        index:
+          format: int32
+          type: integer
+        labels:
+          type: array
+          items:
+            type: string
+        creation_date:
+          type: string
+        creation_author:
+          type: string
+        modified_date:
+          type: string
+        modified_author:
+          type: string
+        assigned_to:
+          type: string
+        stage:
+          type: string
+        description:
+          type: string
+        bim_snippet:
+          $ref: '#/components/schemas/BimSnippet2'
+        due_date:
+          type: string
+        authorization:
+          $ref: '#/components/schemas/Authorization5'
+    TopicGET3:
+      required:
+      - guid
+      - server_assigned_id
+      - title
+      - creation_date
+      type: object
+      properties:
+        guid:
+          type: string
+        server_assigned_id:
+          type: string
+        topic_type:
+          $ref: '#/components/schemas/ExtensionItemGET'
+        topic_status:
+          $ref: '#/components/schemas/ExtensionItemGET'
+        reference_links:
+          type: array
+          items:
+            type: string
+        title:
+          type: string
+        priority:
+          $ref: '#/components/schemas/ExtensionItemGET'
+        index:
+          format: int32
+          type: integer
+        labels:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExtensionItemGET'
+        creation_date:
+          type: string
+        creation_author:
+          $ref: '#/components/schemas/Author'
+        modified_date:
+          type: string
+        modified_author:
+          $ref: '#/components/schemas/Author'
+        assigned_to:
+          $ref: '#/components/schemas/Author'
+        stage:
+          $ref: '#/components/schemas/ExtensionItemGET'
+        description:
+          type: string
+        due_date:
+          type: string
+        custom_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomField1'
+        related_topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedTopicGET2'
+        main_viewpoint_guid:
+          type: string
+        authorization:
+          $ref: '#/components/schemas/Authorization9'
+    TopicStatus:
+      required:
+      - id
+      - name
+      - status_type
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status_type:
+          $ref: '#/components/schemas/StatusType'
+    TopicUserGET:
+      type: object
+      properties:
+        ref:
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+    Type:
+      enum:
+      - integer
+      - decimal
+      - string
+      - boolean
+      - enum
+      - date
+      - date-time
+      type: string
+    TypeGET:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Up:
+      type: object
+      properties:
+        x:
+          format: double
+          type: number
+        "y":
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+    UploadDocumentsGET:
+      type: object
+      properties:
+        uploadUIUrl:
+          type: string
+        expiresIn:
+          format: int64
+          type: integer
+        maxSizeInBytes:
+          format: int64
+          type: integer
+    UploadFileInstructionsGET:
+      type: object
+      properties:
+        url:
+          type: string
+        httpMethod:
+          type: string
+        additionalHeaders:
+          $ref: '#/components/schemas/AdditionalHeadersGET'
+        includeAuthorization:
+          type: boolean
+        multipartFormData:
+          $ref: '#/components/schemas/MultipartFormDataGET'
+        contentRangeStart:
+          format: int64
+          type: integer
+        contentRangeEnd:
+          format: int64
+          type: integer
+    UploadInstructionsGET:
+      type: object
+      properties:
+        serverContext:
+          type: string
+        documentsToUpload:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentToUploadGET'
+    User:
+      type: object
+      properties:
+        ref:
+          $ref: '#/components/schemas/UserRef'
+        externalId:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        username:
+          type: string
+        created:
+          format: date
+          type: string
+          example: 2022-03-10
+        updated:
+          format: date
+          type: string
+          example: 2022-03-10
+        ownerRef:
+          $ref: '#/components/schemas/UserRef'
+    User1:
+      required:
+      - id
+      - email
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+    UserGET:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    UserGET1:
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: string
+    UserGET2:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    UserPrincipal:
+      type: object
+      properties:
+        cache:
+          $ref: '#/components/schemas/ObjectCache'
+        client:
+          $ref: '#/components/schemas/Client'
+        notificationsDisabled:
+          type: boolean
+        user:
+          $ref: '#/components/schemas/User'
+        userRequestType:
+          $ref: '#/components/schemas/UserRequestType'
+        userRef:
+          $ref: '#/components/schemas/UserRef'
+        requestType:
+          $ref: '#/components/schemas/UserRequestType'
+        onBehalfOfOrganization:
+          $ref: '#/components/schemas/OptionalUser'
+        clientId:
+          $ref: '#/components/schemas/ClientId'
+    UserRef:
+      type: object
+      properties:
+        value:
+          type: string
+        shortValue:
+          type: string
+    UserRequestType:
+      enum:
+      - AS_BIMSYNC_ADMINISTRATOR
+      - AS_REGULAR_USER
+      type: string
+    Value:
+      type: object
+      properties:
+        id:
+          type: string
+        displayValue:
+          type: string
+    Version:
+      required:
+      - api_id
+      - version_id
+      type: object
+      properties:
+        api_id:
+          $ref: '#/components/schemas/ApiId'
+        version_id:
+          type: string
+        detailed_version:
+          type: string
+        api_base_url:
+          type: string
+    Version1:
+      required:
+      - version_id
+      type: object
+      properties:
+        version_id:
+          type: string
+        detailed_version:
+          type: string
+    VersionGET:
+      required:
+      - version_id
+      type: object
+      properties:
+        version_id:
+          type: string
+        detailed_version:
+          type: string
+    VersionsGET:
+      required:
+      - versions
+      type: object
+      properties:
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Version'
+    VersionsGET1:
+      required:
+      - versions
+      type: object
+      properties:
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Version1'
+    ViewSetupHints:
+      type: object
+      properties:
+        spaces_visible:
+          type: boolean
+        space_boundaries_visible:
+          type: boolean
+        openings_visible:
+          type: boolean
+    ViewSetupHints1:
+      type: object
+      properties:
+        spaces_visible:
+          type: boolean
+        space_boundaries_visible:
+          type: boolean
+        openings_visible:
+          type: boolean
+    ViewSetupHints2:
+      type: object
+      properties:
+        spaces_visible:
+          type: boolean
+        space_boundaries_visible:
+          type: boolean
+        openings_visible:
+          type: boolean
+    ViewpointAction:
+      enum:
+      - delete
+      type: string
+    ViewpointAction1:
+      enum:
+      - delete
+      type: string
+    ViewpointGET:
+      required:
+      - guid
+      type: object
+      properties:
+        guid:
+          type: string
+        orthogonal_camera:
+          $ref: '#/components/schemas/OrthogonalCamera'
+        perspective_camera:
+          $ref: '#/components/schemas/PerspectiveCamera'
+        lines:
+          $ref: '#/components/schemas/Lines'
+        clipping_planes:
+          $ref: '#/components/schemas/ClippingPlanes'
+        bitmaps:
+          $ref: '#/components/schemas/Bitmaps'
+    ViewpointGET1:
+      required:
+      - guid
+      type: object
+      properties:
+        index:
+          format: int32
+          type: integer
+        guid:
+          type: string
+        orthogonal_camera:
+          $ref: '#/components/schemas/OrthogonalCamera1'
+        perspective_camera:
+          $ref: '#/components/schemas/PerspectiveCamera1'
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/Line1'
+        clipping_planes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClippingPlane1'
+        bitmaps:
+          type: array
+          items:
+            $ref: '#/components/schemas/BitmapGET'
+        snapshot:
+          $ref: '#/components/schemas/SnapshotGET'
+    ViewpointGET2:
+      required:
+      - guid
+      type: object
+      properties:
+        index:
+          format: int32
+          type: integer
+        guid:
+          type: string
+        orthogonal_camera:
+          $ref: '#/components/schemas/OrthogonalCamera2'
+        perspective_camera:
+          $ref: '#/components/schemas/PerspectiveCamera2'
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/Line2'
+        clipping_planes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClippingPlane2'
+        bitmaps:
+          type: array
+          items:
+            $ref: '#/components/schemas/BitmapGET1'
+        snapshot:
+          $ref: '#/components/schemas/SnapshotGET1'
+        authorization:
+          $ref: '#/components/schemas/Authorization6'
+    ViewpointGET3:
+      required:
+      - guid
+      - creation_date
+      - topic_file_ids
+      type: object
+      properties:
+        index:
+          format: int32
+          type: integer
+        guid:
+          type: string
+        orthogonal_camera:
+          $ref: '#/components/schemas/OrthogonalCamera3'
+        perspective_camera:
+          $ref: '#/components/schemas/PerspectiveCamera3'
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/Line3'
+        markers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Marker'
+        clipping_planes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClippingPlane3'
+        bitmaps:
+          type: array
+          items:
+            $ref: '#/components/schemas/BitmapGET2'
+        snapshot:
+          $ref: '#/components/schemas/SnapshotGET2'
+        creation_date:
+          type: string
+        creation_author:
+          $ref: '#/components/schemas/Author'
+        authorization:
+          $ref: '#/components/schemas/Authorization10'
+        topic_file_ids:
+          type: array
+          items:
+            type: string
+    ViewpointModel:
+      type: object
+      properties:
+        modelRef:
+          type: string
+        revisionRef:
+          type: string
+    Visibility:
+      type: object
+      properties:
+        default_visibility:
+          type: boolean
+        exceptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component'
+        view_setup_hints:
+          $ref: '#/components/schemas/ViewSetupHints'
+    Visibility1:
+      type: object
+      properties:
+        default_visibility:
+          type: boolean
+        exceptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component1'
+        view_setup_hints:
+          $ref: '#/components/schemas/ViewSetupHints1'
+    Visibility2:
+      type: object
+      properties:
+        default_visibility:
+          type: boolean
+        exceptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component2'
+        view_setup_hints:
+          $ref: '#/components/schemas/ViewSetupHints2'
+    VisibilityGET:
+      type: object
+      properties:
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+    VisibilityGET1:
+      type: object
+      properties:
+        visibility:
+          $ref: '#/components/schemas/Visibility1'
+    VisibilityGET2:
+      type: object
+      properties:
+        visibility:
+          $ref: '#/components/schemas/Visibility2'
