@@ -161,7 +161,7 @@
 /documents/1.0/bimsync-project/{bimsync_project_id}/selected-documents/{token}
 /documents/1.0/bimsync-project/{bimsync_project_id}/upload-documents/{token}/initiate
 /documents/1.0/bimsync-project/{bimsync_project_id}/upload-documents/{token}/{session-file}/cancel
-/documents/1.0/bimsync-project/{bimsync_project_id/upload-documents/{token}/{session-file}/commit
+/documents/1.0/bimsync-project/{bimsync_project_id}/upload-documents/{token}/{session-file}/commit
 /documents/1.0/bimsync-project/{bimsync_project_id}/{type}/{document}/versions
 /documents/1.0/bimsync-project/{bimsync_project_id}/{type}/{document}/versions/{file}
 /documents/1.0/bimsync-project/{bimsync_project_id}/{type}/{document}/versions/{file}/download
