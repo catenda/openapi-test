@@ -1,0 +1,188 @@
+openapi: 3.0.3
+info:
+  title: OpenCDE OpenAPI Specification
+  version: "1.0"
+externalDocs:
+  description: Find out more about Catenda REST API
+  url: https://apidocs.dev.catenda.net/catenda-api
+servers:
+  - url: https://api.catenda.com/v2
+tags:
+  - name: Label
+paths:
+  /projects/{project}/labels:
+    get:
+      tags:
+        - Label
+      summary: Get labels
+      operationId: getLabels
+      parameters:
+        - name: project
+          in: path
+          description: ID of project labels belong to
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Label'
+      security:
+        - Bearer: []
+    post:
+      tags:
+        - Label
+      summary: Add label
+      operationId: addLabel
+      parameters:
+        - name: project
+          in: path
+          description: ID of project label will belong to
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Creates a new label.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabelPost'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Label'
+      security:
+        - Bearer: []
+  /projects/{project}/labels/{label}:
+    get:
+      tags:
+        - Label
+      summary: Get label
+      operationId: getLabel
+      parameters:
+        - name: project
+          in: path
+          description: ID of project label belongs to
+          required: true
+          schema:
+            type: string
+        - name: label
+          in: path
+          description: ID of label to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Label'
+      security:
+        - Bearer: []
+    patch:
+      tags:
+        - Label
+      summary: Update label
+      operationId: updateLabel
+      parameters:
+        - name: project
+          in: path
+          description: ID of project to update
+          required: true
+          schema:
+            type: string
+        - name: label
+          in: path
+          description: ID of label to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Updates an existing label.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Label'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Label'
+      security:
+        - Bearer: []
+    delete:
+      tags:
+        - Label
+      summary: Delete label
+      operationId: deleteLabel
+      parameters:
+        - name: project
+          in: path
+          description: ID of project to delete
+          required: true
+          schema:
+            type: string
+        - name: label
+          in: path
+          description: ID of label to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Label'
+components:
+  schemas:
+    LabelPost:
+      allOf:
+        - $ref: "#/components/schemas/Label"
+        - type: object
+          required: [name, color]
+    Label:
+      type: object
+      properties:
+        id:
+          type: string
+          example: d729fd422
+        name:
+          type: string
+          example: Green
+        color:
+          type: string
+          example: '#6aa84f'
+        deleted:
+          type: boolean
+          example: false
+    ApiResponseOk:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      bearerFormat: AccessToken
